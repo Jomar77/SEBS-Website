@@ -8,7 +8,7 @@ import Footer from "../Components/Footer.jsx";
 export default function Index() {
   return (
     <>
-      <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+      <div className="flex flex-col items-center justify-center w-full min-h-screen bg-gray-100">
         <Header />
 
         <Outlet />
