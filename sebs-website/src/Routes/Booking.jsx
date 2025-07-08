@@ -32,15 +32,15 @@ const services = [
 
 export default function Booking() {
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-gray-100 to-gray-300 flex flex-col items-center justify-start pb-12" style={{backgroundImage: 'url("/waves-bg.svg")', backgroundRepeat: 'repeat', backgroundSize: 'cover'}}>
-      <h2 className="text-5xl font-serif font-bold text-cyan-900 mt-12 mb-10">Book A Service</h2>
+    <div className="min-h-screen w-full bg-gradient-to-b from-base-100 to-base-300 flex flex-col items-center justify-start pb-12" style={{backgroundImage: 'url("/waves-bg.svg")', backgroundRepeat: 'repeat', backgroundSize: 'cover'}}>
+      <h2 className="text-5xl font-serif font-bold text-primary-content mt-12 mb-10">Book A Service</h2>
       <div className="flex flex-wrap justify-center gap-6 mb-12">
         {services.map((service, idx) => (
           <ServiceCard key={idx} {...service} />
         ))}
       </div>
-      <h2 className="text-5xl font-serif font-bold text-cyan-900 mt-12 mb-10">Choose a date</h2>
-      <div className="flex flex-wrap justify-center gap-8 w-full max-w-5xl text-black ">
+      <h2 className="text-5xl font-serif font-bold text-primary-content mt-12 mb-10">Choose a date</h2>
+      <div className="flex flex-wrap justify-center gap-8 w-full max-w-5xl">
         {/* First calendar: current month */}
         <div className="bg-neutral-50 rounded-lg shadow-lg p-8 flex-1 min-w-[350px] max-w-[500px]">
           <FullCalendar
