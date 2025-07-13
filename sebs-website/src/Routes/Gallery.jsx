@@ -1,4 +1,4 @@
-export default function Contact() {
+export default function Gallery() {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-base-100">
       <h1 className="text-4xl font-bold text-primary">Contact</h1>

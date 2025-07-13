@@ -1,5 +1,5 @@
 import React from "react";
-import ServiceCard from "../Components/ServiceCard";
+import ServiceCard from "../Components/Booking/ServiceCard";
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
