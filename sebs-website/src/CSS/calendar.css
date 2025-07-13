@@ -1,0 +1,15 @@
+.fc .fc-daygrid-day-number,
+.fc .fc-col-header-cell-cushion,
+.fc .fc-toolbar-title,
+.fc .fc-daygrid-day {
+  color: #1e293b !important; /* Much darker text for readability */
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  background: #fef3c7 !important; /* subtle highlight for today */
+  border-radius: 50%;
+}
+
+.fc .fc-col-header-cell {
+  font-weight: 600;
+}
