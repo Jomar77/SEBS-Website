@@ -8,9 +8,9 @@
   color-scheme: light;
 
   /* Base colors (backgrounds, cards) */
-  --color-base-100: #fdf6f0; /* warm cream */
-  --color-base-200: #f7d0d5; /* light pink (secondary) */
-  --color-base-300: #f5f5f4; /* light beige */
+  --color-base-100: #fff8ee; /* warm cream */
+  --color-base-200: #faf4eb; /* light pink (secondary) */
+  --color-base-300: #fffaf4; /* light beige */
   --color-base-content: #0f766e; /* dark teal for headings */
 
   /* Primary (light blue/teal) */
@@ -19,7 +19,7 @@
 
 
   /* Secondary (pink/rose) */
-  --color-secondary: #f8bbd9;
+  --color-secondary: #f7d0d5;
   --color-secondary-content: #bb8c7d;
 
   /* Accent (coral/orange) */

@@ -4,7 +4,7 @@
 export default function EventPackageSection() {
   return (
     <>
-      <section className="px-6 py-12 bg-base-200">
+      <section className="px-6 py-12 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-3xl font-bold">Your Event Toolkit</h3>
           <p className="mt-4">Lorem ipsum dolor sit amet...</p>

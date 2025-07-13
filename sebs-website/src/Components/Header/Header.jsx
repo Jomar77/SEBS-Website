@@ -30,7 +30,7 @@ export default function Header() {
             </div>
 
             {/* Navigation */}
-            <nav className="bg-base-200">
+            <nav className="bg-secondary">
                 <NavMenu />
             </nav>
         </header>

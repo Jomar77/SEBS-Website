@@ -1,21 +1,22 @@
 import GallerySection from "../Components/Index/GallerySection/GallerySection";
 import ServiceSection from "../Components/Index/ServiceSection/ServiceSection";
 import EventPackageSection from "../Components/About/EventPackageSection";
+import ReviewSection from "../Components/Index/ReviewSection/ReviewSection";
+import ServiceSteps from "../Components/Index/ReviewSection/ServiceSteps";
 
 export default function Index() {
   return (
-    <div className="bg-base-100">
-      {/* Hero Section */}
+    <div className="bg-white">
       <section className="flex flex-col items-center justify-center h-screen bg-base-100">
         <h1 className="text-4xl font-bold text-primary-content">
           Welcome to My Website
         </h1>
       </section>
-      
-      {/* Services Section - No container padding/margins */}
+
       <ServiceSection />
       <GallerySection />
       <EventPackageSection />
+      <ReviewSection />
     </div>
   );
 }

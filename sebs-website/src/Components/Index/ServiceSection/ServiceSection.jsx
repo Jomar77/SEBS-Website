@@ -90,7 +90,7 @@ export default function ServiceSection() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative bg-base-100"
+      className="relative bg-base-200"
     >
       {/* Full viewport-width background that breaks out of any container */}
       <div className="wave-background absolute top-0 left-1/2 w-screen h-full -translate-x-1/2 opacity-40 pointer-events-none z-0 overflow-hidden">
