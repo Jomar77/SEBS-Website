@@ -18,7 +18,7 @@ const steps = [
 
 export default function ServiceSteps() {
   return (
-    <div className="flex justify-center gap-8 py-8 bg-base-100">
+    <div className="flex justify-center w-full gap-8 py-8 bg-white">
       {steps.map((step, i) => (
         <div key={i} className="flex flex-col items-center">
           {step.icon}

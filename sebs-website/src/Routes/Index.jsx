@@ -2,7 +2,6 @@ import GallerySection from "../Components/Index/GallerySection/GallerySection";
 import ServiceSection from "../Components/Index/ServiceSection/ServiceSection";
 import EventPackageSection from "../Components/About/EventPackageSection";
 import ReviewSection from "../Components/Index/ReviewSection/ReviewSection";
-import ServiceSteps from "../Components/Index/ReviewSection/ServiceSteps";
 
 export default function Index() {
   return (
