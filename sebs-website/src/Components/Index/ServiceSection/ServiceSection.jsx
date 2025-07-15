@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ServiceCard from './ServiceCards';
-import WavePattern from './WavePattern';
+import WavePattern from '../../Common/WavePattern';
 
 gsap.registerPlugin(ScrollTrigger);
 

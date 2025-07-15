@@ -1,0 +1,87 @@
+/* filepath: c:\Users\jomna\Documents\GitHub\SEBS-Website\sebs-website\src\Components\Gallery\ParallaxCarousel.css */
+.curved-carousel-container {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.curved-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1200px;
+  perspective-origin: center center;
+}
+
+.carousel-cards {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-card {
+  position: absolute;
+  width: 280px;
+  height: 320px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+  backface-visibility: hidden;
+}
+
+.carousel-controls {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 2rem;
+  right: 2rem;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.carousel-controls button {
+  pointer-events: auto;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .curved-carousel-container {
+    height: 400px;
+  }
+  
+  .carousel-card {
+    width: 200px;
+    height: 240px;
+  }
+  
+  .carousel-controls {
+    left: 1rem;
+    right: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .curved-carousel-container {
+    height: 350px;
+  }
+  
+  .carousel-card {
+    width: 160px;
+    height: 200px;
+  }
+}
