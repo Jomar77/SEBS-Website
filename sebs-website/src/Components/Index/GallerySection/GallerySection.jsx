@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
+import PolaroidCard from "../../Common/PolaroidCard/PolaroidCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -162,7 +163,7 @@ export default function GallerySection() {
         >
           {/* Left Navigation Button */}
           <button 
-            className="btn btn-circle bg-pink-200 border-none text-pink-600 hover:bg-pink-300 shadow-lg disabled:opacity-30 active:transform-none absolute left-4 top-1/2 -translate-y-1/2 z-10"
+            className="btn btn-circle bg-pink-200 border-none text-pink-600 hover:bg-pink-300 shadow-lg disabled:opacity-30 active:scale-100 absolute left-4 top-1/2 z-10"
             onClick={prevSlide}
             disabled={currentSlide === 0}
             aria-label="Previous slide"
@@ -174,7 +175,7 @@ export default function GallerySection() {
 
           {/* Right Navigation Button */}
           <button 
-            className="btn btn-circle bg-pink-200 border-none text-pink-600 hover:bg-pink-300 shadow-lg disabled:opacity-30 active:transform-none absolute right-4 top-1/2 -translate-y-1/2 z-10"
+            className="btn btn-circle bg-pink-200 border-none text-pink-600 hover:bg-pink-300 shadow-lg disabled:opacity-30 active:scale-100 absolute right-4 top-1/2  z-10"
             onClick={nextSlide}
             disabled={currentSlide >= maxSlide}
             aria-label="Next slide"
@@ -201,23 +202,11 @@ export default function GallerySection() {
                     'w-1/4'
                   } px-1`}
                 >
-                  {/* Polaroid Card */}
-                  <div className="card w-full bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 p-2">
-                    {/* Photo area with very thin white border (polaroid style) */}
-                    <div className="bg-white p-0.5 rounded-lg">
-                      <div className={`h-64 ${item.color} rounded-lg`} />
-                    </div>
-                    
-                    {/* Card body (bottom white section like polaroid) */}
-                    <div className="card-body pt-4 pb-2 px-2 text-center">
-                      <h3 className="card-title text-lg font-bold text-base-content justify-center mb-1">
-                        {item.title}
-                      </h3>
-                      <p className="text-base-content/70 text-sm">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
+                  <PolaroidCard 
+                    title={item.title}
+                    description={item.description}
+                    color={item.color}
+                  />
                 </div>
               ))}
             </div>
