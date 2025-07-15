@@ -16,7 +16,7 @@ export default function NavMenu() {
             to={to}
             end={end}
             className={({ isActive }) =>
-              `uppercase font-bold tracking-wide hover:underline ${
+              `uppercase font-bold tracking-wide hover: ${
                 isActive ? "text-white" : "text-secondary-content hover:text-white"
               }`
             }

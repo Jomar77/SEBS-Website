@@ -30,9 +30,9 @@ export default function About() {
           </h3>
           <p>Our celebration deserves more than just food...</p>
         </div>
-        <div className="bg-base-200 h-40"></div>
+        <div className="bg-secondary h-40"></div>
 
-        <div className="bg-base-200 h-40"></div>
+        <div className="bg-secondary h-40"></div>
         <div className="space-y-4">
           <h3 className="text-2xl font-semibold text-primary">
             The Arkives: Capture The Moment
@@ -46,7 +46,7 @@ export default function About() {
           </h3>
           <p>Our celebration deserves more than just food...</p>
         </div>
-        <div className="bg-base-200 h-40"></div>
+        <div className="bg-secondary h-40"></div>
       </section>
 
       <AboutForm />

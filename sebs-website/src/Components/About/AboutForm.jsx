@@ -21,14 +21,14 @@ export default function AboutForm() {
                 { icon: RiFacebookFill, label: "Facebook" },
                 { icon: RiWhatsappFill, label: "Whatsapp" },
               ].map(({ icon: Icon, label }, i) => (
-                <div key={i} className="card bg-base-200 p-6 text-center">
+                <div key={i} className="card bg-secondary p-6 text-center">
                   <Icon className="text-2xl mx-auto" />
                   <p className="mt-2">{label}</p>
                   <p className="text-sm">hdshdkhskhfh</p>
                 </div>
               ))}
             </div>
-            <div className="bg-base-200 h-40"></div>
+            <div className="bg-secondary h-40"></div>
           </div>
 
           <form className="space-y-4">

@@ -7,7 +7,7 @@ export default function ServiceShowcaseCard({
   colorClass
 }) {
   return (
-    <div className="card bg-base-100 shadow-xl transition-transform duration-300 hover:scale-105">
+    <div className="card bg-white shadow-xl transition-transform duration-300 hover:scale-105">
       {/* Color Block */}
       <div className={`h-64 ${colorClass} rounded-t-2xl`} />
       

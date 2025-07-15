@@ -90,15 +90,15 @@ export default function ServiceSection() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative bg-base-100"
+      className="relative bg-base-200 overflow-hidden"
     >
-      {/* Full viewport-width background that breaks out of any container */}
-      <div className="wave-background absolute top-0 left-1/2 w-screen h-full -translate-x-1/2 opacity-40 pointer-events-none z-0 overflow-hidden">
+      {/* Remove the left-1/2 -translate-x-1/2 and use full width properly */}
+      <div className="wave-background absolute top-0 left-0 w-full h-full opacity-40 pointer-events-none z-0">
         <WavePattern />
       </div>
       
-      {/* Additional layered background for depth - also breaks out */}
-      <div className="absolute top-0 left-1/2 w-screen h-full -translate-x-1/2 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none z-10" />
+      {/* Fix the second background layer too */}
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none z-10" />
       
       {/* Content container */}
       <div className="relative z-20 py-20 min-h-screen">
@@ -128,8 +128,8 @@ export default function ServiceSection() {
           </div>
         </div>
 
-        {/* Enhanced bottom wave decoration - also full width */}
-        <div className="absolute bottom-0 left-1/2 w-screen h-32 -translate-x-1/2 bg-gradient-to-t from-secondary/10 via-primary/5 to-transparent pointer-events-none z-10" />
+        {/* Fix bottom decoration */}
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-secondary/10 via-primary/5 to-transparent pointer-events-none z-10" />
       </div>
     </section>
   );
