@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 const GalleryGrid = ({ 
   title, 
   images = [], 
-  bgColor = "bg-gray-50",
+  bgColor = "bg-white",
   titleColor = "text-gray-800" 
 }) => {
   const galleryRef = useRef(null);

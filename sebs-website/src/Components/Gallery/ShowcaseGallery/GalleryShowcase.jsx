@@ -21,7 +21,7 @@ const GalleryShowcase = () => {
     <GalleryGrid 
       title="Event #1"
       images={eventImages}
-      bgColor="bg-gray-50"
+      bgColor="bg-white"
       titleColor="text-gray-800"
     />
   );

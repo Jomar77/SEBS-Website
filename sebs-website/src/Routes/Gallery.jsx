@@ -3,6 +3,7 @@
 import GalleryShowcase from "../Components/Gallery/ShowcaseGallery/GalleryShowcase";
 import CurvedCarousel from "../Components/Gallery/CarouselGallery/ParallaxCarousel";
 import RecentEvent from "../Components/Gallery/RecentEvent";
+import EventPackageSection from "../Components/Common/EventPackageSection/EventPackageSection";
 
 export default function Gallery() {
   // Sample gallery data for event planning business
@@ -23,6 +24,7 @@ export default function Gallery() {
         <CurvedCarousel panels={galleryPanels} />
         <RecentEvent />
         <GalleryShowcase />
+        <EventPackageSection />
       </div>
     </>
   );

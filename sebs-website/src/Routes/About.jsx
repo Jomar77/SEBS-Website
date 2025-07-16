@@ -1,6 +1,6 @@
 import React from "react";
-import EventPackage from "../Components/About/EventPackageSection";
 import AboutForm from "../Components/About/AboutForm";
+import EventPackageSection from "../Components/Common/EventPackageSection/EventPackageSection";
 
 export default function About() {
   return (
@@ -51,7 +51,7 @@ export default function About() {
 
       <AboutForm />
 
-      <EventPackage />
+      <EventPackageSection/>
     </div>
   );
 }
