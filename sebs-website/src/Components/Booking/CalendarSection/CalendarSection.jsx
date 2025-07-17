@@ -2,7 +2,7 @@ import { useState } from "react";
 import CalendarMonth from "./CalendarMonth";
 import WavePattern from "../../Common/WavePattern";
 
-export default function CalendarSection() {
+export default function CalendarSection({ onDateSelect }) {
   const now = new Date();
   const [startYear, setStartYear] = useState(now.getFullYear());
   const [startMonth, setStartMonth] = useState(now.getMonth());
@@ -51,7 +51,6 @@ export default function CalendarSection() {
         Choose a date
       </h2>
       <div className="flex flex-wrap justify-center gap-8 w-full max-w-5xl mx-auto items-center">
-        {/* Animated sliding container */}
         <div className="relative flex items-center w-full justify-center">
           <button
             onClick={handlePrev}
@@ -72,17 +71,12 @@ export default function CalendarSection() {
               />
             </svg>
           </button>
-          <div
-            className="flex gap-8 transition-transform duration-500 ease-in-out"
-            style={{
-              transform: `translateX(-${0}px)`, // You can add more advanced sliding logic if you want
-            }}
-          >
-            <CalendarMonth year={startYear} month={startMonth} />
-            {/* Next month calculation */}
+          <div className="flex gap-8 transition-transform duration-500 ease-in-out">
+            <CalendarMonth year={startYear} month={startMonth} onDateSelect={onDateSelect} />
             <CalendarMonth
               year={startMonth === 11 ? startYear + 1 : startYear}
               month={startMonth === 11 ? 0 : startMonth + 1}
+              onDateSelect={onDateSelect}
             />
           </div>
           <button

@@ -1,42 +1,15 @@
 import React from "react";
-
-import BookServiceSection from "../Components/Booking/ServiceSectionBooking/BookServiceSection";
-import CalendarSection from "../Components/Booking/CalendarSection/CalendarSection";
-import BookingFormSection from "../Components/Booking/BookingForm/BookingFormSection";
-
-const services = [
-  {
-    price: "$300",
-    title: "Psalm $ Platter",
-    desc: "Per hour",
-    highlight: false,
-  },
-  {
-    price: "$450",
-    title: "The Arkives",
-    desc: "Lorem Ipsum",
-    highlight: false,
-  },
-  {
-    price: "$500",
-    title: "Package A",
-    desc: "Lorem Ipsum",
-    highlight: true,
-  },
-  {
-    price: "$600",
-    title: "Package B",
-    desc: "Lorem Ipsum",
-    highlight: false,
-  },
-];
+import { Outlet, useLocation } from "react-router-dom";
+import ProgressBar from "../Components/Booking/ProgressBar";
 
 export default function Booking() {
+  const location = useLocation();
+  const showProgressBar = location.pathname !== "/booking";
+
   return (
-    <div className=" w-full ">
-      <BookServiceSection services={services} />
-      <CalendarSection />
-      <BookingFormSection />
+    <div className="w-full">
+      {showProgressBar && <ProgressBar />}
+      <Outlet />
     </div>
   );
 }

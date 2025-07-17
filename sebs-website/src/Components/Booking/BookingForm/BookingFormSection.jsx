@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const BookingFormSection = () => {
+const BookingFormSection = ({ onSubmit }) => {
   const [duration, setDuration] = useState(1);
   const [payment, setPayment] = useState("Bank Transfer");
   const [form, setForm] = useState({
@@ -10,6 +10,11 @@ const BookingFormSection = () => {
     address: "",
     time: "",
   });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit({ ...form, duration, payment });
+  };
 
   return (
     <div className="flex flex-col md:flex-row w-full min-h-screen bg-white">
@@ -79,7 +84,7 @@ const BookingFormSection = () => {
       <div className="md:w-1/2 w-full p-16 flex flex-col justify-center">
         <h2 className="text-4xl font-semibold text-yellow-400 mb-2">Details</h2>
         <p className="text-base text-slate-700 mb-6">Fill in your payment details and complete the order.</p>
-        <form className="flex flex-col gap-6">
+        <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
           <div>
             <label className="block text-slate-800 mb-1">Email Address</label>
             <input
@@ -125,7 +130,9 @@ const BookingFormSection = () => {
               onChange={e => setForm({ ...form, time: e.target.value })}
             />
           </div>
-          <button type="submit" className="btn w-full bg-pink-300 text-white text-xl rounded-xl mt-4 hover:bg-pink-400 border-none">Confirm</button>
+          <button type="submit" className="btn w-full bg-pink-300 text-white text-xl rounded-xl mt-4 hover:bg-pink-400 border-none">
+            Confirm
+          </button>
         </form>
       </div>
     </div>
