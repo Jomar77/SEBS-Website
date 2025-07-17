@@ -13,7 +13,7 @@ export default function ProgressBar() {
 
   return (
     <div className="w-full flex justify-center py-6 bg-base-200">
-      <ul className="steps">
+      <ul className="steps w-1/2">
         {steps.map((step, idx) => (
           <li
             key={step.label}

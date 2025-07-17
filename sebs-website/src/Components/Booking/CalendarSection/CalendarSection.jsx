@@ -6,10 +6,40 @@ export default function CalendarSection({ onDateSelect }) {
   const now = new Date();
   const [startYear, setStartYear] = useState(now.getFullYear());
   const [startMonth, setStartMonth] = useState(now.getMonth());
+  const [selectedDate, setSelectedDate] = useState(null);
 
   // Prevent navigating to past months
   const isPrevDisabled =
     startYear === now.getFullYear() && startMonth === now.getMonth();
+
+  // Handle date selection
+  const handleDateSelect = (date) => {
+    setSelectedDate(date);
+  };
+
+  // Handle confirm button click
+  const handleConfirmDate = () => {
+    console.log("Confirm button clicked");
+    console.log("selectedDate:", selectedDate);
+    console.log("onDateSelect:", onDateSelect);
+    
+    if (selectedDate && onDateSelect) {
+      console.log("Calling onDateSelect with:", selectedDate);
+      onDateSelect(selectedDate);
+    } else {
+      console.log("Missing selectedDate or onDateSelect");
+    }
+  };
+
+  // Format selected date for display
+  const formatSelectedDate = (date) => {
+    return date.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
 
   // Next button handler
   const handleNext = () => {
@@ -72,11 +102,17 @@ export default function CalendarSection({ onDateSelect }) {
             </svg>
           </button>
           <div className="flex gap-8 transition-transform duration-500 ease-in-out">
-            <CalendarMonth year={startYear} month={startMonth} onDateSelect={onDateSelect} />
+            <CalendarMonth
+              year={startYear}
+              month={startMonth}
+              onDateSelect={handleDateSelect}
+              selectedDate={selectedDate}
+            />
             <CalendarMonth
               year={startMonth === 11 ? startYear + 1 : startYear}
               month={startMonth === 11 ? 0 : startMonth + 1}
-              onDateSelect={onDateSelect}
+              onDateSelect={handleDateSelect}
+              selectedDate={selectedDate}
             />
           </div>
           <button
@@ -98,6 +134,36 @@ export default function CalendarSection({ onDateSelect }) {
             </svg>
           </button>
         </div>
+
+        {/* Selected date confirmation section */}
+        {selectedDate && (
+          <div className="w-full flex flex-col items-center mt-8 space-y-4">
+            <div className="bg-white rounded-lg shadow-md p-6 text-center">
+              <h3 className="text-lg font-semibold text-gray-700 mb-2">
+                Selected Date
+              </h3>
+              <p className="text-xl font-bold text-primary mb-4">
+                {formatSelectedDate(selectedDate)}
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setSelectedDate(null)}
+                  className="btn btn-outline btn-sm"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleConfirmDate}
+                  className="btn btn-primary btn-sm"
+                  style={{ pointerEvents: 'auto', zIndex: 1000 }}
+                  onMouseEnter={() => console.log("Button hovered")}
+                >
+                  Confirm Date
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
