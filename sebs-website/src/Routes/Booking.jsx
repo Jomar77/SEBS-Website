@@ -2,6 +2,7 @@ import React from "react";
 
 import BookServiceSection from "../Components/Booking/ServiceSectionBooking/BookServiceSection";
 import CalendarSection from "../Components/Booking/CalendarSection/CalendarSection";
+import BookingFormSection from "../Components/Booking/BookingForm/BookingFormSection";
 
 const services = [
   {
@@ -35,6 +36,7 @@ export default function Booking() {
     <div className=" w-full ">
       <BookServiceSection services={services} />
       <CalendarSection />
+      <BookingFormSection />
     </div>
   );
 }
