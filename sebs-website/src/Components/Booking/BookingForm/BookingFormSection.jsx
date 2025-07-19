@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const BookingFormSection = ({ onSubmit }) => {
+const BookingFormSection = ({ onSubmit, selectedService, selectedDate }) => {
   const [duration, setDuration] = useState(1);
   const [payment, setPayment] = useState("Bank Transfer");
   const [form, setForm] = useState({
@@ -13,7 +13,17 @@ const BookingFormSection = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ ...form, duration, payment });
+    onSubmit({ ...form, duration, payment, selectedDate });
+  };
+
+  // Format date for display
+  const formatDate = (date) => {
+    if (!date) return "No date selected";
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
   };
 
   return (
@@ -27,15 +37,31 @@ const BookingFormSection = ({ onSubmit }) => {
         {/* Package Card */}
         <div className="border p-4 flex items-center justify-between mb-6">
           <div className="flex items-center gap-4">
-            <div className="bg-slate-100 w-32 h-24" />
+            <div className="bg-orange-200 w-32 h-24 rounded" />
             <div>
-              <div className="text-lg font-medium text-slate-800">Package A</div>
-              <div className="text-base text-slate-700">October 15 2025</div>
+              <div className="text-lg font-medium text-slate-800">
+                {selectedService?.title || "No service selected"}
+              </div>
+              <div className="text-base text-slate-700">
+                {selectedService?.desc || "per hour"}
+              </div>
             </div>
           </div>
           <div className="text-right">
-            <div className="text-2xl font-semibold text-slate-800">$500</div>
-            <div className="text-base text-slate-700">per hour</div>
+            <div className="text-2xl font-semibold text-slate-800">
+              {selectedService?.price || "$0"}
+            </div>
+            <div className="text-base text-slate-700">
+              per hour
+            </div>
+          </div>
+        </div>
+        
+        {/* Selected Date Display */}
+        <div className="border p-4 mb-6">
+          <div className="text-lg font-semibold text-slate-800 mb-2">Event Date</div>
+          <div className="text-xl text-primary font-medium">
+            {formatDate(selectedDate)}
           </div>
         </div>
         {/* Hire Duration */}
