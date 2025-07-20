@@ -8,61 +8,90 @@ export default function DetailsStep() {
 
   async function handleSubmit(formData) {
     updateBooking({ form: formData });
-    
+
     // Prepare the request body
     const requestBody = {
       customerName: formData.name,
       customerEmail: formData.email,
       customerPhone: formData.contact,
-      eventDate: booking.date ? booking.date.toISOString() : new Date().toISOString(),
+      eventDate: booking.date
+        ? booking.date.toISOString()
+        : new Date().toISOString(),
       location: formData.address,
       eventType: 1,
-      eventName: `${booking.service?.title || 'Event'} - ${formData.time || 'Time TBD'}`,
-      notes: `Duration: ${formData.duration} hours. Payment method: ${formData.payment}. Additional notes: ${formData.address ? `Event at ${formData.address}` : 'No additional notes'}`,
+      eventName: `${booking.service?.title || "Event"} - ${
+        formData.time || "Time TBD"
+      }`,
+      notes: `Duration: ${formData.duration} hours. Payment method: ${
+        formData.payment
+      }. Additional notes: ${
+        formData.address
+          ? `Event at ${formData.address}`
+          : "No additional notes"
+      }`,
       services: [
         {
           ServiceID: booking.service?.id || 1,
           Quantity: parseInt(formData.duration) || 1,
-          CustomPrice: parseFloat(booking.service?.price?.replace('$', '') || '0'),
-          Notes: `${booking.service?.desc || 'Service'} - ${formData.time || 'Time TBD'}`
-        }
-      ]
+          CustomPrice: parseFloat(
+            booking.service?.price?.replace("$", "") || "0"
+          ),
+          Notes: `${booking.service?.desc || "Service"} - ${
+            formData.time || "Time TBD"
+          }`,
+        },
+      ],
     };
-    
+
     console.log("Sending booking request:", JSON.stringify(requestBody));
-    
+
     // API request with properly mapped data
-    const res = await fetch(`${import.meta.env.VITE_SEBS_API_URL}/api/booking/request`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(requestBody),
-    });
-    
+    const res = await fetch(
+      `${import.meta.env.VITE_SEBS_API_URL}/api/booking/request`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestBody),
+      }
+    );
+
     if (res.ok) {
+      const bookingResponse = await res.json();
       // Show success, redirect, etc.
       console.log("Booking successful!");
+      console.log("📋 Booking Response:", bookingResponse);
+
+      // Store the booking reference and full response in context
+      updateBooking({
+        bookingReference: bookingResponse.bookingReference,
+        bookingResponse: bookingResponse,
+      });
       navigate("/booking/success");
     } else {
       // Show error feedback
       const errorText = await res.text();
       console.error("Booking failed with status:", res.status);
       console.error("Error response:", errorText);
-      
+
       let errorData;
       try {
         errorData = JSON.parse(errorText);
       } catch (e) {
         errorData = { message: errorText };
       }
-      
+
       console.error("Parsed error data:", errorData);
-      alert(`Booking failed (${res.status}): ${errorData.message || errorData.title || 'Unknown error'}`);
+      alert(
+        `Booking failed (${res.status}): ${
+          errorData.message || errorData.title || "Unknown error"
+        }`
+      );
     }
   }
 
   return (
-    <BookingFormSection 
-      onSubmit={handleSubmit} 
+    <BookingFormSection
+      onSubmit={handleSubmit}
       selectedService={booking.service}
       selectedDate={booking.date}
     />
