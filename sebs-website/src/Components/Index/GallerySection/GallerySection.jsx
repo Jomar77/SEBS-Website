@@ -1,16 +1,8 @@
-<<<<<<< HEAD
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import PolaroidCard from "../../Common/PolaroidCard";
-=======
-import { useState, useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Link } from "react-router-dom";
-import PolaroidCard from "../../Common/PolaroidCard/PolaroidCard";
->>>>>>> 8bc4341 (Refactor code structure and remove redundant changes for improved clarity and maintainability)
 
 gsap.registerPlugin(ScrollTrigger);
 

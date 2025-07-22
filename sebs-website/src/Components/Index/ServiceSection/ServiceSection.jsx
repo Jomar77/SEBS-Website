@@ -1,16 +1,8 @@
-<<<<<<< HEAD
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ServiceCard from './ServiceCards';
 import WavePattern from '../../Common/WavePattern';
-=======
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ServiceCard from "./ServiceCards";
-import WavePattern from "./WavePattern";
->>>>>>> 8bc4341 (Refactor code structure and remove redundant changes for improved clarity and maintainability)
 
 gsap.registerPlugin(ScrollTrigger);
 
