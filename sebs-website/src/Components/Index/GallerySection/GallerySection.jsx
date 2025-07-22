@@ -139,13 +139,14 @@ export default function GallerySection() {
             </svg>
           </button>
 
-          <div className="carousel carousel-center max-w-full space-x-2 bg-transparent p-4 mx-16">
+          <div className="carousel w-full overflow-hidden">
             <div
-              className="flex transition-transform duration-500 ease-in-out items-stretch"
+              className="flex transition-transform duration-500 ease-in-out "
               style={{
                 transform: `translateX(-${
                   currentSlide * (100 / visibleSlides)
                 }%)`,
+                width: `${(galleryItems.length * 100) / visibleSlides}%`
               }}
             >
               {galleryItems.map((item) => (
@@ -157,11 +158,11 @@ export default function GallerySection() {
                       : visibleSlides === 2
                       ? "w-1/2"
                       : "w-1/4"
-                  } px-4`} // px-4 for more space between cards
+                  } px-2`}
                 >
                   <PolaroidCard
                     color={item.color}
-                    className="w-full max-w-[180px]"
+                    className="w-full max-w-[280px]"
                   />
                 </div>
               ))}

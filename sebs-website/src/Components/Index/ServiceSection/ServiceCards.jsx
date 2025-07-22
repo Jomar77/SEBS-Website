@@ -7,7 +7,7 @@ export default function ServiceShowcaseCard({
   colorClass,
 }) {
   return (
-    <div className="bg-white border-20 border-white shadow-lg flex flex-col overflow-hidden w-550px min-h-[480px]">
+    <div className="bg-white border-20 border-white shadow-lg flex flex-col overflow-hidden w-full max-w-[350px] lg:max-w-none lg:flex-1 min-h-[480px]">
       {/* Color/Image Block */}
       <div className={`w-full h-50 ${colorClass}`} />
 
@@ -21,7 +21,7 @@ export default function ServiceShowcaseCard({
         </p>
         <div className="mt-auto">
           <Link
-            to="/book"
+            to="/booking"
             className="inline-block px-6 py-2 rounded-lg bg-[#f4c2b1] text-white text-xs font-bold uppercase tracking-wide shadow hover:bg-[#f5bd64] transition"
           >
             Book Now
