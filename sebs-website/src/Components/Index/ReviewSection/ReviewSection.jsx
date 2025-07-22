@@ -21,6 +21,8 @@ export default function ReviewSection() {
   //     });
   // }, []);
 
+
+  //hello gab
   return (
     <section className="flex flex-col bg-base-100 py-16 gap-8">
       <div>
