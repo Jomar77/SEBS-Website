@@ -21,12 +21,11 @@ export default function ReviewSection() {
   //     });
   // }, []);
 
-
   //hello gab
   return (
     <section className="flex flex-col bg-base-100 py-16 gap-8">
       <div>
-        <h2 className="text-3xl font-bold text-center mb-8">
+        <h2 className="text-4xl font-corben-reg text-center mb-8 text-[#204558]">
           love our services?
         </h2>
         <div className="max-w-2xl mx-auto">
@@ -44,7 +43,7 @@ export default function ReviewSection() {
             href="#"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-primary"
+            className="px-5 py-2 bg-[#e5aac1] text-white font-semibold rounded-md hover:bg-white hover:text-[#e5aac1] transition duration-200"
           >
             Leave a review
           </a>

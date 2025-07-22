@@ -119,7 +119,7 @@ export default function GallerySection() {
           </button>
 
           <button
-            className="btn btn-circle bg-pink-200 border-none text-black hover:bg-pink-300 shadow-lg disabled:opacity-30 active:scale-100 absolute right-4 top-1/2  z-10"
+            className="btn btn-circle bg-pink-200 border-none text-black hover:bg-pink-300 shadow-lg disabled:opacity-30 active:scale-100 absolute right-4 top-1/2 z-10"
             onClick={nextSlide}
             disabled={currentSlide >= maxSlide}
             aria-label="Next slide"

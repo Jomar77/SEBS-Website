@@ -8,8 +8,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
-    id: "venue-design",
-    title: "Venue Design",
+    id: "graphic-design",
+    title: "Graphic Design",
     description:
       "Lorem ipsum dolor sit amet. Cum dolores vero aut sint aperiam quo voluptates numquam id eaque dolor ut ratione adipisci.",
     colorClass: "bg-[#e5adc2]",
