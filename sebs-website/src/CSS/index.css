@@ -55,4 +55,64 @@
   /* effects */
   --depth: 1;
   --noise: 0;
+
+}
+
+/* fonts */
+  @font-face {
+  font-family: 'Yeseva One';
+  src: url('../fonts/yeseva_one/YesevaOne-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  }
+
+.font-yeseva {
+  font-family: 'Yeseva One', serif;
+}
+
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  src: url('../fonts/be_vietnam_pro/ttf/BeVietnamPro-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+.font-vietnam {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: 'Corben';
+  src: url('../fonts/Corben/Corben-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+.font-corben-bold {
+  font-family: 'Corben';
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Montserrat Alternates';
+  src: url('../fonts/Montserrat-Full-Version/Desktop Fonts/Montserrat Alternates/MontserratAlternates-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+.font-montserrat-alt {
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Corben';
+  src: url('../fonts/Corben/Corben-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-corben-reg {
+  font-family: 'Corben', serif;
 }
