@@ -17,16 +17,53 @@ export default function Lookup() {
     setShowSummary(false);
 
     try {
-      const res = await fetch("/api/booking/lookup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          bookingReference: bookingRef,
-          lastName: fullName,
-        }),
-      });
-      if (!res.ok) throw new Error("Booking not found");
-      const data = await res.json();
+      // const res = await fetch("/api/booking/lookup", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({
+      //     bookingReference: bookingRef,
+      //     lastName: fullName,
+      //   }),
+      // });
+      // if (!res.ok) throw new Error("Booking not found");
+      // const data = await res.json();
+
+      // Filler data for demo/testing
+      const data = {
+        bookingID: 123,
+        bookingDate: "2025-07-29T03:23:34.751Z",
+        status: "Confirmed",
+        bookingReference: bookingRef,
+        customerName: fullName,
+        customerEmail: "sample@email.com",
+        customerPhone: "0917-123-4567",
+        eventDetails: {
+          eventID: 1,
+          eventDate: "2025-08-15T18:00:00.000Z",
+          location: "123 Main St, City",
+          eventType: 1,
+          status: 1,
+          name: "Birthday Party",
+          notes: "No peanuts",
+          eventServices: [
+            {
+              eventServiceID: 1,
+              eventID: 1,
+              serviceID: 2,
+              customPrice: 5000,
+              quantity: 1,
+              notes: "",
+              serviceName: "Photobooth",
+              serviceDescription: "Unlimited prints for 3 hours",
+              serviceBasePrice: 5000,
+            },
+          ],
+          meetings: [],
+        },
+        approvedByName: "Jane Doe",
+        approvedDate: "2025-07-30T10:00:00.000Z",
+      };
+
       setBookingData(data);
       setShowSummary(true);
     } catch (err) {
