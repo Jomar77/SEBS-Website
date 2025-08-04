@@ -6,10 +6,10 @@ export default function Header() {
   return (
     <header className="w-full">
       {/* Top bar */}
-      <div className="bg-accent-content h-5 w-full" />
+      <div className="bg-[#8fc2c3] h-5 w-full" />
 
       {/* Main header */}
-      <div className="flex items-center justify-between px-9 py-6 bg-white">
+      <div className="flex items-center justify-between px-9 py-6 bg-[#fff]">
         {/* Search icon */}
         <div className="flex-1 flex items-center">
           <FaMagnifyingGlass className="text-xl text-teal-900" />
@@ -23,16 +23,16 @@ export default function Header() {
         {/* Social icons */}
         <div className="flex-1 flex justify-end space-x-2">
           <a href="#" aria-label="Facebook">
-            <FaFacebookSquare className="text-2xl text-[#f5bd64]" />
+            <FaFacebookSquare className="text-2xl text-[#ffba51]" />
           </a>
           <a href="#" aria-label="Instagram">
-            <FaInstagram className="text-2xl text-[#f5bd64]" />
+            <FaInstagram className="text-2xl text-[#ffba51]" />
           </a>
         </div>
       </div>
 
       {/* Navigation */}
-      <nav className="bg-secondary">
+      <nav className="bg-[#f8d1d6]">
         <NavMenu />
       </nav>
     </header>

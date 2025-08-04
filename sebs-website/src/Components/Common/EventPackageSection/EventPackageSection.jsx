@@ -26,11 +26,11 @@ export default function EventPackageSection() {
   };
 
   return (
-    <section className="w-full px-4 py-25 bg-white">
+    <section className="w-full px-25 py-45 bg-[#fff]">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-center items-center gap-12">
         {/* Left side - Text content */}
         <div className="text-center lg:text-left max-w-xl">
-          <h3 className="text-4xl font-corben-reg text-gray-800 mb-6">
+          <h3 className="text-5xl font-corben-reg text-gray-800 mb-6">
             Your Event Toolkit
           </h3>
           <p className="text-gray-600 font-corben-reg leading-relaxed">
