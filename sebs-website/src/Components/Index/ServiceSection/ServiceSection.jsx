@@ -2,29 +2,32 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ServiceCard from './ServiceCards';
-import WavePattern from './WavePattern';
+import WavePattern from '../../Common/WavePattern';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
-    id: 'venue-design',
-    title: 'Venue Design',
-    description: 'Lorem ipsum dolor sit amet. Cum dolores vero aut sint aperiam quo voluptates numquam id eaque dolor ut ratione adipisci.',
-    colorClass: 'bg-secondary'
+    id: "graphic-design",
+    title: "Graphic Design",
+    description:
+      "Lorem ipsum dolor sit amet. Cum dolores vero aut sint aperiam quo voluptates numquam id eaque dolor ut ratione adipisci.",
+    colorClass: "bg-[#efaac3]",
   },
   {
-    id: 'photobooth',
-    title: 'Photobooth', 
-    description: 'Lorem ipsum dolor sit amet. Cum dolores vero aut sint aperiam quo voluptates numquam id eaque dolor ut ratione adipisci.',
-    colorClass: 'bg-warning'
+    id: "photobooth",
+    title: "Photobooth",
+    description:
+      "Lorem ipsum dolor sit amet. Cum dolores vero aut sint aperiam quo voluptates numquam id eaque dolor ut ratione adipisci.",
+    colorClass: "bg-[#ffc571]",
   },
   {
-    id: 'grazing-cart',
-    title: 'Grazing Cart',
-    description: 'Lorem ipsum dolor sit amet. Cum dolores vero aut sint aperiam quo voluptates numquam id eaque dolor ut ratione adipisci.',
-    colorClass: 'bg-accent'
-  }
+    id: "grazing-cart",
+    title: "Grazing Cart",
+    description:
+      "Lorem ipsum dolor sit amet. Cum dolores vero aut sint aperiam quo voluptates numquam id eaque dolor ut ratione adipisci.",
+    colorClass: "bg-[#f3794c]",
+  },
 ];
 
 export default function ServiceSection() {
@@ -35,7 +38,8 @@ export default function ServiceSection() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Animate title with enhanced entrance
-      gsap.fromTo(titleRef.current, 
+      gsap.fromTo(
+        titleRef.current,
         { opacity: 0, y: 50, scale: 0.8 },
         {
           opacity: 1,
@@ -47,12 +51,13 @@ export default function ServiceSection() {
             trigger: titleRef.current,
             start: "top 80%",
             end: "bottom 50%",
-          }
+          },
         }
       );
 
       // Enhanced staggered card reveals
-      gsap.fromTo(cardsRef.current.children,
+      gsap.fromTo(
+        cardsRef.current.children,
         { opacity: 0, y: 100, scale: 0.8, rotateX: 45 },
         {
           opacity: 1,
@@ -66,64 +71,56 @@ export default function ServiceSection() {
             trigger: cardsRef.current,
             start: "top 80%",
             end: "bottom 20%",
-          }
+          },
         }
       );
 
       // Background parallax effect
-      gsap.to(sectionRef.current.querySelector('.wave-background'), {
+      gsap.to(sectionRef.current.querySelector(".wave-background"), {
         yPercent: -20,
         ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top bottom",
           end: "bottom top",
-          scrub: true
-        }
+          scrub: true,
+        },
       });
-
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section 
-      ref={sectionRef} 
-      className="relative bg-base-200 overflow-hidden"
-    >
+    <section ref={sectionRef} className="relative bg-base-200 overflow-hidden">
       {/* Remove the left-1/2 -translate-x-1/2 and use full width properly */}
       <div className="wave-background absolute top-0 left-0 w-full h-full opacity-40 pointer-events-none z-0">
         <WavePattern />
       </div>
-      
+
       {/* Fix the second background layer too */}
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none z-10" />
-      
+
       {/* Content container */}
       <div className="relative z-20 py-20 min-h-screen">
         <div className="container mx-auto px-4 max-w-7xl">
           {/* Section Header */}
           <div className="text-center mb-16">
-            <h2 
+            <h2
               ref={titleRef}
-              className="text-5xl md:text-6xl font-serif font-bold text-base-content mb-6 drop-shadow-sm"
+              className="text-5xl md:text-6xl font-yeseva font-serif text-[#0e465a] mb-6 drop-shadow-sm"
             >
-              Our services
+              Our Services
             </h2>
-            <div className="w-24 h-1 bg-primary mx-auto rounded-full shadow-lg" />
           </div>
 
           {/* Services Grid */}
-          <div 
+          <div
             ref={cardsRef}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-8 xl:gap-12"
+            className="grid grid-cols-1 lg:grid-cols-3 gap-12 xl:gap-20 justify-center w-fit mx-auto"
           >
             {services.map((service) => (
-              <ServiceCard 
-                key={service.id}
-                {...service}
-              />
+              <ServiceCard key={service.id} {...service} />
             ))}
           </div>
         </div>

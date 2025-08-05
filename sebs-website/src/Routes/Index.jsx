@@ -1,6 +1,6 @@
 import GallerySection from "../Components/Index/GallerySection/GallerySection";
 import ServiceSection from "../Components/Index/ServiceSection/ServiceSection";
-import EventPackageSection from "../Components/About/EventPackageSection";
+import EventPackageSection from "../Components/Common/EventPackageSection/EventPackageSection";
 import ReviewSection from "../Components/Index/ReviewSection/ReviewSection";
 
 export default function Index() {

@@ -1,30 +1,28 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-export default function ServiceShowcaseCard({ 
-  id, 
-  title, 
-  description, 
-  colorClass
+export default function ServiceShowcaseCard({
+  id,
+  title,
+  description,
+  colorClass,
 }) {
   return (
-    <div className="card bg-white shadow-xl transition-transform duration-300 hover:scale-105">
-      {/* Color Block */}
-      <div className={`h-64 ${colorClass} rounded-t-2xl`} />
-      
+    <div className="bg-[#fff] border-20 border-white shadow-lg flex flex-col overflow-hidden w-full max-w-[350px] lg:max-w-none lg:flex-1 min-h-[480px]">
+      {/* Color/Image Block */}
+      <div className={`w-full h-50 ${colorClass}`} />
+
       {/* Card Body */}
-      <div className="card-body text-center p-8">
-        <h3 className="card-title text-2xl font-bold text-base-content justify-center mb-4">
+      <div className="p-6 text-center flex flex-col flex-1">
+        <h3 className="font-corben-bold text-xl text-[#204558] mb-2 font-bold">
           {title}
         </h3>
-        
-        <p className="text-base-content opacity-80 mb-6 leading-relaxed">
+        <p className="font-montserrat-alt text-sm text-[#204558] opacity-80 mb-6 leading-tight">
           {description}
         </p>
-        
-        <div className="card-actions justify-center">
-          <Link 
-            to="/book"
-            className="btn btn-primary btn-lg uppercase tracking-wide font-bold"
+        <div className="mt-auto">
+          <Link
+            to="/booking"
+            className="inline-block px-6 py-3 rounded-xl bg-[#fec0ae] text-white text-xs font-bold uppercase tracking-wide shadow hover:bg-[#f5bd64] transition"
           >
             Book Now
           </Link>
