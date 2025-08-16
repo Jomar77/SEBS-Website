@@ -8,7 +8,7 @@ export default function Index() {
     <div className="bg-white">
       <section className="flex flex-col items-center justify-center h-screen bg-base-100">
         <h1 className="text-4xl font-bold text-primary-content">
-          Welcome to My Website
+          Welcome to Our Website                                                                                                    '
         </h1>
       </section>
 
