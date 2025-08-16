@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import "./CSS/index.css";
+import { Analytics } from "@vercel/analytics/react";
 
 import {
   createBrowserRouter,
@@ -21,9 +22,6 @@ import DetailsStep from "./Components/Booking/BookingRequest/DetailsStep.jsx";
 import BookingSuccess from "./Components/Booking/BookingSuccess.jsx";
 import BookingLanding from "./Components/Booking/BookingLanding.jsx";
 import Lookup from "./Components/Booking/BookingLookup/Lookup.jsx";
-
-
-
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -50,6 +48,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BookingProvider>
       <RouterProvider router={router} />
+      <Analytics />
     </BookingProvider>
   </React.StrictMode>
 );
