@@ -9,15 +9,15 @@ const navLinks = [
 
 export default function NavMenu() {
   return (
-    <ul className="flex justify-center space-x-16 py-1">
+    <ul className="flex justify-center space-x-14 py-1">
       {navLinks.map(({ to, label, end }) => (
         <li key={to}>
           <NavLink
             to={to}
             end={end}
             className={({ isActive }) =>
-              `uppercase font-bold font-vietnam tracking-wide hover: ${
-                isActive ? "text-white" : "text-secondary-content hover:text-white"
+              `uppercase font-bold font-vietnam tracking-wide text sm hover:text-white ${
+                isActive ? "text-white" : "text-[#d2958b] hover:text-white"
               }`
             }
           >

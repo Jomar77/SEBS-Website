@@ -12,21 +12,21 @@ const services = [
     title: "Graphic Design",
     description:
       "Lorem ipsum dolor sit amet. Cum dolores vero aut sint aperiam quo voluptates numquam id eaque dolor ut ratione adipisci.",
-    colorClass: "bg-[#e5adc2]",
+    colorClass: "bg-[#efaac3]",
   },
   {
     id: "photobooth",
     title: "Photobooth",
     description:
       "Lorem ipsum dolor sit amet. Cum dolores vero aut sint aperiam quo voluptates numquam id eaque dolor ut ratione adipisci.",
-    colorClass: "bg-[#f6c77e]",
+    colorClass: "bg-[#ffc571]",
   },
   {
     id: "grazing-cart",
     title: "Grazing Cart",
     description:
       "Lorem ipsum dolor sit amet. Cum dolores vero aut sint aperiam quo voluptates numquam id eaque dolor ut ratione adipisci.",
-    colorClass: "bg-[#e38157]",
+    colorClass: "bg-[#f3794c]",
   },
 ];
 
@@ -108,7 +108,7 @@ export default function ServiceSection() {
           <div className="text-center mb-16">
             <h2
               ref={titleRef}
-              className="text-5xl md:text-6xl font-yeseva font-serif text-[#204558] mb-6 drop-shadow-sm"
+              className="text-5xl md:text-6xl font-yeseva font-serif text-[#0e465a] mb-6 drop-shadow-sm"
             >
               Our Services
             </h2>

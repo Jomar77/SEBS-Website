@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom";
 import PolaroidCard from "../../Common/PolaroidCard";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -98,7 +98,7 @@ export default function GallerySection() {
       <div className="container mx-auto px-4 max-w-7xl">
         <div ref={carouselRef} className="relative">
           <button
-            className="btn btn-circle bg-pink-200 border-none text-black hover:bg-pink-300 shadow-lg disabled:opacity-30 active:scale-100 absolute left-4 top-1/2 z-10"
+            className="btn btn-circle bg-[#f0a7c2] border-none text-black hover:bg-[#f0a7c2]/80 shadow-lg disabled:opacity-30 active:scale-100 absolute left-4 top-1/2 z-10"
             onClick={prevSlide}
             disabled={currentSlide === 0}
             aria-label="Previous slide"
@@ -146,7 +146,7 @@ export default function GallerySection() {
                 transform: `translateX(-${
                   currentSlide * (100 / visibleSlides)
                 }%)`,
-                width: `${(galleryItems.length * 100) / visibleSlides}%`
+                width: `${(galleryItems.length * 100) / visibleSlides}%`,
               }}
             >
               {galleryItems.map((item) => (
@@ -162,7 +162,7 @@ export default function GallerySection() {
                 >
                   <PolaroidCard
                     color={item.color}
-                    className="w-full max-w-[280px]"
+                    className="w-full max-w-[240px] h-[300px] sm:h-[320px] md:h-[340px] rounded-2xl shadow-md"
                   />
                 </div>
               ))}
