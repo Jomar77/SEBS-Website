@@ -35,11 +35,10 @@ export default function Footer() {
           {/* Contact Us */}
           <div className="flex-1 text-white md:text-[#17414d]">
             <h3 className="font-serif text-2xl font-bold mb-4">Contact Us</h3>
-            <div className="text-lg mb-2">Phone: +1 234 567 890</div>
             <div className="text-lg">
               Email:{" "}
-              <a href="mailto:info@colorfulevents.com" className="underline">
-                info@colorfulevents.com
+              <a href="mailto:psalmandplatter@gmail.com" className="underline">
+                psalmandplatter@gmail.com
               </a>
             </div>
           </div>
@@ -47,7 +46,7 @@ export default function Footer() {
           <div className="flex-1">
             <h3 className="font-serif text-2xl font-bold mb-4">Follow Us</h3>
             <div className="flex space-x-4 text-3xl">
-              <a href="#" aria-label="Facebook">
+              <a href="https://www.facebook.com/psalmandplatternz" aria-label="Facebook">
                 <FaFacebookF />
               </a>
               <a href="#" aria-label="Instagram">
