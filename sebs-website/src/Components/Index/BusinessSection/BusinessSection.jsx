@@ -5,9 +5,12 @@ export default function BusinessSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Business Card 1 */}
           <div className="bg-[#f5f1e8] rounded-xl p-8 flex items-center justify-center h-48">
-            <div className="w-24 h-24 bg-[#8b9557] rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-2xl">P&P</span>
-            </div>
+            <img 
+              src="/img/P&P2 (1).png"
+              alt="Psalm & Platter Logo" 
+              className="w-40 h-40 object-contain"
+              loading="lazy"
+            />
           </div>
           
           {/* Business Card 2 */}
