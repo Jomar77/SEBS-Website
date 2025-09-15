@@ -58,7 +58,7 @@ export default function Footer() {
       </div>
       <div className="border-t border-[#17414d] my-8 w-full" />
         <div className="text-center text-lg font-serif text-[#17414d]">
-          &copy; {new Date().getFullYear()} Lorem Ipsum. All rights reserved.
+          &copy; {new Date().getFullYear()} Psalm & Platter. All rights reserved.
         </div>
     </footer>
   );
