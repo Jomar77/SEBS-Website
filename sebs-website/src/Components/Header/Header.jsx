@@ -16,8 +16,8 @@ export default function Header() {
         </div>
         {/* Logo */}
         <div className="flex-1 flex justify-center">
-          <span className="text-5xl font-yeseva text-primary-content">
-            logo
+          <span className="text-4xl font-yeseva text-primary-content">
+            Psalm & Platter
           </span>
         </div>
         {/* Social icons */}
