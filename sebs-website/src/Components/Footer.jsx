@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <footer className="bg-[#8fc2c3] text-[#17414d] w-full pt-12 pb-4">
-      <div className="max-w-7xl mx-auto px-30">
-        <div className="flex flex-col md:flex-row md:items-start md:gap-0 gap-4">
+      <div className="max-w-3xl px-8">
+        <div className="flex flex-col md:flex-row md:items-start md:gap-2 gap-4">
           {/* Quick Links */}
           <nav className="flex-1" aria-label="Footer Navigation">
             <h3 className="font-serif text-2xl font-bold mb-4">Quick Links</h3>
@@ -55,11 +55,11 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="border-t border-[#17414d] my-8 w-full" />
+      </div>
+      <div className="border-t border-[#17414d] my-8 w-full" />
         <div className="text-center text-lg font-serif text-[#17414d]">
           &copy; {new Date().getFullYear()} Lorem Ipsum. All rights reserved.
         </div>
-      </div>
     </footer>
   );
 }
