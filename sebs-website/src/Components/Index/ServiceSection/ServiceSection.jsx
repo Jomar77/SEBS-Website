@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useData } from '../../../Context/DataContext';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ServiceCard from './ServiceCards';
@@ -6,31 +7,14 @@ import WavePattern from '../../Common/WavePattern';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const services = [
-  {
-    id: "graphic-design",
-    title: "Graphic Design",
-    description:
-      "Lorem ipsum dolor sit amet. Cum dolores vero aut sint aperiam quo voluptates numquam id eaque dolor ut ratione adipisci.",
-    colorClass: "bg-[#efaac3]",
-  },
-  {
-    id: "photobooth",
-    title: "Photobooth",
-    description:
-      "Lorem ipsum dolor sit amet. Cum dolores vero aut sint aperiam quo voluptates numquam id eaque dolor ut ratione adipisci.",
-    colorClass: "bg-[#ffc571]",
-  },
-  {
-    id: "grazing-cart",
-    title: "Grazing Cart",
-    description:
-      "Lorem ipsum dolor sit amet. Cum dolores vero aut sint aperiam quo voluptates numquam id eaque dolor ut ratione adipisci.",
-    colorClass: "bg-[#f3794c]",
-  },
-];
+
+
+
+
 
 export default function ServiceSection() {
+  const { services, loading, error } = useData();
+  const [current, setCurrent] = useState(0);
   const sectionRef = useRef();
   const titleRef = useRef();
   const cardsRef = useRef();
@@ -93,18 +77,12 @@ export default function ServiceSection() {
 
   return (
     <section ref={sectionRef} className="relative bg-base-200 overflow-hidden">
-      {/* Remove the left-1/2 -translate-x-1/2 and use full width properly */}
       <div className="wave-background absolute top-0 left-0 w-full h-full opacity-40 pointer-events-none z-0">
         <WavePattern />
       </div>
-
-      {/* Fix the second background layer too */}
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none z-10" />
-
-      {/* Content container */}
       <div className="relative z-20 py-20 min-h-screen">
-        <div className="container mx-auto px-4 max-w-7xl">
-          {/* Section Header */}
+        <div className="container mx-auto px-4 max-w-3xl">
           <div className="text-center mb-16">
             <h2
               ref={titleRef}
@@ -113,19 +91,61 @@ export default function ServiceSection() {
               Our Services
             </h2>
           </div>
-
-          {/* Services Grid */}
-          <div
-            ref={cardsRef}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-12 xl:gap-20 justify-center w-fit mx-auto"
-          >
-            {services.map((service) => (
-              <ServiceCard key={service.id} {...service} />
-            ))}
+          <div className="flex justify-center items-center">
+            <button
+              className="btn btn-circle btn-outline mr-4"
+              aria-label="Previous Service"
+              onClick={() => setCurrent((prev) => (prev - 1 + services.length) % services.length)}
+              disabled={loading || error || services.length === 0}
+            >
+              <span className="text-2xl">&#8592;</span>
+            </button>
+            <div
+              ref={cardsRef}
+              className="carousel w-[350px] sm:w-[400px] md:w-[500px] h-[520px] transition-all duration-500 ease-in-out"
+            >
+              {loading && (
+                <div className="flex items-center justify-center w-full h-full text-lg">Loading services...</div>
+              )}
+              {error && (
+                <div className="flex items-center justify-center w-full h-full text-red-500">Failed to load services.</div>
+              )}
+              {!loading && !error && services.length > 0 && (
+                <div
+                  className="carousel-item w-full transition-transform duration-500 ease-in-out"
+                  style={{
+                    transform: `translateX(0)`,
+                    opacity: 1,
+                  }}
+                  key={services[current].id}
+                >
+                  <ServiceCard {...services[current]} />
+                </div>
+              )}
+            </div>
+            <button
+              className="btn btn-circle btn-outline ml-4"
+              aria-label="Next Service"
+              onClick={() => setCurrent((prev) => (prev + 1) % services.length)}
+              disabled={loading || error || services.length === 0}
+            >
+              <span className="text-2xl">&#8594;</span>
+            </button>
           </div>
+          {/* Carousel indicators */}
+          {!loading && !error && services.length > 1 && (
+            <div className="flex justify-center mt-6 gap-2">
+              {services.map((_, idx) => (
+                <button
+                  key={idx}
+                  className={`btn btn-xs rounded-full transition-all duration-300 ${idx === current ? 'bg-[#efaac3] scale-125' : 'bg-gray-300'}`}
+                  onClick={() => setCurrent(idx)}
+                  aria-label={`Go to service ${idx + 1}`}
+                />
+              ))}
+            </div>
+          )}
         </div>
-
-        {/* Fix bottom decoration */}
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-secondary/10 via-primary/5 to-transparent pointer-events-none z-10" />
       </div>
     </section>

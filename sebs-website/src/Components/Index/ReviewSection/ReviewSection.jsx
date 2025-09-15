@@ -40,7 +40,7 @@ export default function ReviewSection() {
         </div>
         <div className="flex justify-center mt-8">
           <a
-            href="#"
+            href="https://www.facebook.com/psalmandplatternz?sk=reviews"
             target="_blank"
             rel="noopener noreferrer"
             className="px-5 py-2 bg-[#f0a7c2] text-white font-semibold rounded-md hover:bg-white hover:text-[#f0a7c2] transition duration-200"
