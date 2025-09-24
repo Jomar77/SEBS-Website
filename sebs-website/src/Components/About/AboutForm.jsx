@@ -1,9 +1,8 @@
 import {
   RiFacebookFill,
-  RiMessage2Fill,
-  RiMailFill,
   RiWhatsappFill,
 } from "react-icons/ri";
+import { FaFacebookMessenger, FaEnvelope, FaFacebook, FaWhatsapp } from "react-icons/fa";
 
 export default function AboutForm() {
   return (
@@ -14,24 +13,24 @@ export default function AboutForm() {
           <div className="grid grid-cols-2 gap-6 mb-8">
             {[
               {
-                icon: RiMessage2Fill,
+                icon: FaFacebookMessenger,
                 label: "Messenger",
-                color: "text-[#6bb7b7]",
+                color: "text-[#9ac1c2]",
               },
               {
-                icon: RiMailFill,
+                icon: FaEnvelope,
                 label: "Email",
-                color: "text-[#fbbd71]",
+                color: "text-[#ffc571]",
               },
               {
-                icon: RiFacebookFill,
+                icon: FaFacebook,
                 label: "Facebook",
                 color: "text-[#4a90e2]",
               },
               {
-                icon: RiWhatsappFill,
+                icon: FaWhatsapp,
                 label: "Whatsapp",
-                color: "text-[#f47c3c]",
+                color: "text-[#fb8950]",
               },
             ].map(({ icon: Icon, label, color }, i) => (
               <div
@@ -49,10 +48,10 @@ export default function AboutForm() {
         </div>
         {/* Right: Form */}
         <div>
-          <h3 className="text-4xl font-bold text-[#23404a] mb-2">
+          <h3 className="font-corben-reg text-5xl text-[#0e465a] mb-2 py-3">
             Get in touch
           </h3>
-          <p className="mb-6 text-[#23404a]">
+          <p className="mb-6 text-[#23404a] py-3">
             Your celebration deserves more than just food—it deserves an
             experience. Our gourmet grazing cart redefines event catering with
             fresh, artfully styled spreads that dazzle the senses.
@@ -63,20 +62,20 @@ export default function AboutForm() {
                 <label className="block text-[#23404a] mb-1">{field}</label>
                 <input
                   type={field === "Email" ? "email" : "text"}
-                  className="border border-[#23404a] rounded-md w-full px-3 py-2 focus:outline-none bg-white"
+                  className="border-[0.5px] border-[#23404a] rounded-md w-full px-3 py-2 focus:outline-none bg-white"
                 />
               </div>
             ))}
             <div>
               <label className="block text-[#23404a] mb-1">Message</label>
               <textarea
-                className="border border-[#23404a] rounded-md w-full px-3 py-2 focus:outline-none bg-white"
+                className="border-[0.5px] border-[#23404a] rounded-md w-full px-3 py-5 focus:outline-none bg-white"
                 rows="4"
               ></textarea>
             </div>
             <button
               type="button"
-              className="w-full rounded-xl bg-pink-300 text-white text-lg py-2 mt-2"
+              className="border-[0.5px] border-[#23404a] w-full rounded-xl bg-[#f0a7c2] text-white font-semibold rounded-md hover:bg-white hover:text-[#f0a7c2] transition duration-200"
             >
               Button
             </button>
