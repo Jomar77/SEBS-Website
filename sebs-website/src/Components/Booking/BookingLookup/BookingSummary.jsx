@@ -1,15 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function BookingSummary({ booking }) {
   const [cancelReason, setCancelReason] = useState("");
+  const [statusMap, setStatusMap] = useState({});
 
-  // Helper: status mapping
-  const statusMap = {
-    1: "Confirmed",
-    2: "Pending",
-    3: "Cancelled",
-    4: "Completed",
-  };
+  // Fetch booking statuses from API
+  useEffect(() => {
+    const API_URL = import.meta.env.VITE_SEBS_API_URL;
+
+    fetch(`${API_URL}/api/Enum/booking-statuses`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch booking statuses");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const statusMapping = {};
+        data.forEach((status) => {
+          statusMapping[status.value] = status.displayName;
+        });
+        setStatusMap(statusMapping);
+      })
+      .catch((error) => {
+        console.error("Error fetching booking statuses:", error);
+        // Fallback to original mapping if API fails
+        setStatusMap({
+          1: "Pending",
+          2: "Confirmed",
+          3: "Cancelled",
+          4: "Completed",
+        });
+      });
+  }, []);
 
   // Helper: format date/time
   const formatDate = (dateStr) =>

@@ -16,6 +16,7 @@ import About from "./Routes/About.jsx";
 import Booking from "./Routes/Booking.jsx";
 import Gallery from "./Routes/Gallery.jsx";
 import { BookingProvider } from "./Context/BookingContext.jsx";
+import { DataProvider } from "./Context/DataContext.jsx";
 import ServiceStep from "./Components/Booking/BookingRequest/ServiceStep.jsx";
 import DateStep from "./Components/Booking/BookingRequest/DateStep.jsx";
 import DetailsStep from "./Components/Booking/BookingRequest/DetailsStep.jsx";
@@ -46,9 +47,11 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BookingProvider>
-      <RouterProvider router={router} />
-      <Analytics />
-    </BookingProvider>
+    <DataProvider>
+      <BookingProvider>
+        <RouterProvider router={router} />
+        <Analytics />
+      </BookingProvider>
+    </DataProvider>
   </React.StrictMode>
 );
