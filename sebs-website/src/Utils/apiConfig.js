@@ -1,21 +1,19 @@
 // API Configuration - Environment-based URL handling
-// For security: Production URL is hardcoded (not exposed via environment variables)
-// Development uses VITE_SEBS_API_URL for flexibility
+// Uses VITE_SEBS_API_URL for all environments (set in Vercel dashboard for production)
 
 /**
- * Get the appropriate API base URL based on the environment
+ * Get the appropriate API base URL based on environment variables
  * @returns {string} The API base URL
  */
 export function getApiUrl() {
-  const mode = import.meta.env.MODE;
+  const apiUrl = import.meta.env.VITE_SEBS_API_URL;
   
-  if (mode === 'production') {
-    // Hardcoded production URL - not exposed in environment variables for security
-    return 'https://your-production-api.com'; // Replace with your actual production API URL
-  } else {
-    // Development/preview - use environment variable for flexibility
-    return import.meta.env.VITE_SEBS_API_URL || 'http://localhost:3000';
+  if (!apiUrl) {
+    console.warn('VITE_SEBS_API_URL not set, falling back to localhost');
+    return 'http://localhost:5139';
   }
+  
+  return apiUrl;
 }
 
 /**
