@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getApiUrl } from "../../../Utils/apiConfig.js";
 
 export default function BookingSummary({ booking }) {
   const [cancelReason, setCancelReason] = useState("");
@@ -6,9 +7,7 @@ export default function BookingSummary({ booking }) {
 
   // Fetch booking statuses from API
   useEffect(() => {
-    const API_URL = import.meta.env.VITE_SEBS_API_URL;
-
-    fetch(`${API_URL}/api/Enum/booking-statuses`)
+    fetch(`${getApiUrl()}/api/Enum/booking-statuses`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch booking statuses");

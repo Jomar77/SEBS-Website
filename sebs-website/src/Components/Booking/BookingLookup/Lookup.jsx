@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import WavePattern from "../../Common/WavePattern";
 import BookingSummary from "./BookingSummary";
+import { getApiUrl } from "../../../Utils/apiConfig.js";
 
 export default function Lookup() {
   const [bookingRef, setBookingRef] = useState("");
@@ -9,8 +10,6 @@ export default function Lookup() {
   const [bookingData, setBookingData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
-  const API_URL = import.meta.env.VITE_SEBS_API_URL
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -21,7 +20,7 @@ export default function Lookup() {
     
 
     try {
-      const res = await fetch(`${API_URL}/api/booking/lookup`, {
+      const res = await fetch(`${getApiUrl()}/api/booking/lookup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
