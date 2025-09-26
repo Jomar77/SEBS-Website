@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 import {
   RiFacebookFill,
   RiWhatsappFill,
@@ -5,6 +7,37 @@ import {
 import { FaFacebookMessenger, FaEnvelope, FaFacebook, FaWhatsapp } from "react-icons/fa";
 
 export default function AboutForm() {
+  const logo1Ref = useRef(null);
+  const dividerRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Only animate logo1 since logo2 was removed
+      const logo1 = logo1Ref.current;
+      if (logo1) {
+        logo1.addEventListener('mouseenter', () => {
+          gsap.to(logo1, {
+            scale: 1.1,
+            rotation: 5,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+        
+        logo1.addEventListener('mouseleave', () => {
+          gsap.to(logo1, {
+            scale: 1,
+            rotation: 0,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+      }
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section className="bg-[#fcf4ea] px-4 md:px-30 py-20">
       <div className="grid md:grid-cols-2 gap-25 items-start ">
@@ -16,35 +49,49 @@ export default function AboutForm() {
                 icon: FaFacebookMessenger,
                 label: "Messenger",
                 color: "text-[#9ac1c2]",
+                description: "Chat with us instantly"
               },
               {
                 icon: FaEnvelope,
                 label: "Email",
                 color: "text-[#ffc571]",
+                description: ".com"
               },
               {
                 icon: FaFacebook,
                 label: "Facebook",
                 color: "text-[#4a90e2]",
+                description: "Follow our page"
               },
               {
                 icon: FaWhatsapp,
                 label: "Whatsapp",
                 color: "text-[#fb8950]",
+                description: "+64 21 123 4567"
               },
-            ].map(({ icon: Icon, label, color }, i) => (
+            ].map(({ icon: Icon, label, color, description }, i) => (
               <div
                 key={i}
                 className="rounded-2xl bg-white p-8 flex flex-col items-center shadow-sm"
               >
                 <Icon className={`text-4xl mb-2 ${color}`} />
                 <p className="font-semibold text-lg text-[#23404a]">{label}</p>
-                <p className="text-sm text-[#23404a] mt-1">hdshdkhskhfh</p>
+                <p className="text-sm text-[#23404a] mt-1">{description}</p>
               </div>
             ))}
           </div>
           {/* Showcase Box */}
-          <div className="rounded-2xl bg-[#f6eada] h-80 w-full"></div>
+          <div className="rounded-2xl bg-[#f6eada] h-80 w-full flex items-center justify-center p-8">
+            <div className="flex flex-col items-center justify-center gap-6 h-full w-full">
+              <div ref={logo1Ref} className="cursor-pointer">
+                <img 
+                  src="/img/LOGO5 copy.png" 
+                  alt="Psalm & Platter Logo" 
+                  className="h-84 w-auto object-contain max-w-full mix-blend-multiply"
+                />
+              </div>
+            </div>
+          </div>
         </div>
         {/* Right: Form */}
         <div>
