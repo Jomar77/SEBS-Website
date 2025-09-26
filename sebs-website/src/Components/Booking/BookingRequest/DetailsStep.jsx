@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useBooking } from "../../../Context/BookingContext";
 import BookingFormSection from "../BookingForm/BookingFormSection";
+import { getApiUrl } from "../../../Utils/apiConfig.js";
 
 export default function DetailsStep() {
   const { booking, updateBooking } = useBooking();
@@ -47,7 +48,7 @@ export default function DetailsStep() {
 
     // API request with properly mapped data
     const res = await fetch(
-      `${import.meta.env.VITE_SEBS_API_URL}/api/booking/request`,
+      `${getApiUrl()}/api/booking/request`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
