@@ -16,9 +16,11 @@ export default function Header() {
         </div>
         {/* Logo */}
         <div className="flex-1 flex justify-center">
-          <span className="text-4xl font-yeseva text-primary-content">
-            Psalm & Platter
-          </span>
+          <img 
+            src="/public/img/P&P New.png"
+            alt="Psalm & Platter" 
+            className="h-12 w-auto"
+          />
         </div>
         {/* Social icons */}
         <div className="flex-1 flex justify-end space-x-2">
