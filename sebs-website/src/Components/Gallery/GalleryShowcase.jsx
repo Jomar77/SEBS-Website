@@ -108,11 +108,11 @@ export default function GalleryShowcase() {
   return (
     <>
       {/* Recent Event Section with Wave Background */}
-      <div className={`relative w-full overflow-hidden bg-gradient-to-br from-blue-50 to-pink-50 transition-all duration-700 ease-in-out ${
+      <div className={`relative w-full overflow-hidden bg-base-200 transition-all duration-700 ease-in-out ${
         expandedEvent === 'recent' ? 'min-h-screen' : 'h-auto'
       }`}>
-        <div className={`absolute inset-0 z-0 transition-opacity duration-700 ${
-          expandedEvent === 'recent' ? 'opacity-100' : 'opacity-30'
+        <div className={`wave-background absolute top-0 left-0 w-full h-full pointer-events-none z-0 transition-opacity duration-700 ${
+          expandedEvent === 'recent' ? 'opacity-40' : 'opacity-20'
         }`}>
           <WavePattern />
         </div>
@@ -176,9 +176,9 @@ export default function GalleryShowcase() {
         </div>
       </div>
 
-      {/* Featured Event Section - Plain Background */}
-      <div className="min-h-screen w-full bg-white">
-        <div className="flex flex-col items-center justify-center min-h-screen p-8">
+      {/* Featured Event Section - With matching background */}
+      <div className="min-h-screen w-full bg-gradient-to-b from-base-100 to-base-200">
+        <div className="flex flex-col items-center justify-center min-h-screen px-8 pt-8">
           <h1 className="text-6xl font-bold text-gray-800 mb-12 text-center">
             Featured Event
           </h1>
@@ -193,7 +193,7 @@ export default function GalleryShowcase() {
             ))}
           </div>
 
-          {/* Expanded featured photos - show when featured event is expanded */}
+          {/* Expanded featured photos */}
           {expandedEvent === 'featured' && (
             <div ref={expandedGridRef} className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
               {Array.from({ length: 8 }, (_, index) => (
