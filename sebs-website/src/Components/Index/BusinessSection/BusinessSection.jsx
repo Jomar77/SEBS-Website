@@ -6,9 +6,9 @@ export default function BusinessSection() {
           {/* Business Card 1 */}
           <div className="bg-[#f5f1e8] p-8 flex items-center justify-center h-48">
             <img 
-              src="/img/P&P2 (1).png"
+              src="public/img/IMG_2719.png"
               alt="Psalm & Platter Logo" 
-              className="w-40 h-40 object-contain"
+              className="w-50 h-50 object-contain"
               loading="lazy"
             />
           </div>
@@ -25,10 +25,12 @@ export default function BusinessSection() {
           
           {/* Business Card 3 */}
           <div className="bg-[#f5f1e8] p-8 flex items-center justify-center h-48">
-            <div className="text-gray-400 text-center">
-              <div className="w-16 h-16 bg-gray-300 rounded mx-auto mb-2"></div>
-              <p className="text-sm">Business Logo</p>
-            </div>
+            <img 
+              src="/img/Whiskers.png"
+              alt="Whiskers Logo" 
+              className="w-55 h-55 object-contain"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import GallerySection from "../Components/Index/GallerySection/GallerySection";
 import ServiceSection from "../Components/Index/ServiceSection/ServiceSection";
 import EventPackageSection from "../Components/Common/EventPackageSection/EventPackageSection";
@@ -16,7 +17,7 @@ export default function Index() {
             {/* Logo Image */}
             <div className="flex justify-center">
               <img
-                src="/public/img/Psalm and Platter.png"
+                src="/public/img/IMG_2423.png"
                 alt="Psalm & Platter"
                 className="h-100 w-auto"
               />
@@ -25,9 +26,12 @@ export default function Index() {
 
           {/* Pink Book Now button - outside container, centered */}
           <div className="flex justify-center mt-8">
-            <button className="bg-[#efaac3] hover:bg-[#e89bb4] text-white font-bold py-4 px-12 rounded-full text-xl transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+            <Link
+              to="/booking"
+              className="bg-[#efaac3] hover:bg-[#e89bb4] text-white font-bold py-4 px-12 rounded-full text-xl transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block"
+            >
               BOOK NOW
-            </button>
+            </Link>
           </div>
         </div>
       </section>

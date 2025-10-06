@@ -1,28 +1,26 @@
-import { useState, useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import WavePattern from '../Common/WavePattern';
+import React, { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import WavePattern from "../../Common/WavePattern";
 
 export default function GalleryShowcase() {
   const [recentEventPhotos, setRecentEventPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [expandedEvent, setExpandedEvent] = useState('recent'); // Start expanded
+  const [expandedEvent, setExpandedEvent] = useState("recent"); // Start expanded
   const expandedGridRef = useRef(null);
   const initialGridRef = useRef(null);
 
   // Hardcoded featured event colors
-  const featuredEventColors = [
-    '#9333EA', '#EC4899', '#10B981', '#F59E0B'
-  ];
+  const featuredEventColors = ["#9333EA", "#EC4899", "#10B981", "#F59E0B"];
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_SEBS_API_URL}/api/events/recent`)
-      .then(res => res.ok ? res.json() : Promise.reject(res))
-      .then(data => {
+      .then((res) => (res.ok ? res.json() : Promise.reject(res)))
+      .then((data) => {
         setRecentEventPhotos(data.photos || []);
         setLoading(false);
       })
-      .catch(error => {
-        console.error('Failed to fetch recent event photos:', error);
+      .catch((error) => {
+        console.error("Failed to fetch recent event photos:", error);
         setLoading(false);
       });
   }, []);
@@ -31,17 +29,20 @@ export default function GalleryShowcase() {
   useEffect(() => {
     if (expandedEvent && expandedGridRef.current) {
       const ctx = gsap.context(() => {
-        const expandedBoxes = expandedGridRef.current.querySelectorAll('.expanded-box');
-        
-        gsap.fromTo(expandedBoxes, 
+        const expandedBoxes = expandedGridRef.current.querySelectorAll(
+          ".expanded-box"
+        );
+
+        gsap.fromTo(
+          expandedBoxes,
           { opacity: 0, y: 30, scale: 0.9 },
-          { 
-            opacity: 1, 
-            y: 0, 
+          {
+            opacity: 1,
+            y: 0,
             scale: 1,
             duration: 0.6,
             stagger: 0.1,
-            ease: "back.out(1.7)"
+            ease: "back.out(1.7)",
           }
         );
       }, expandedGridRef);
@@ -54,17 +55,18 @@ export default function GalleryShowcase() {
   useEffect(() => {
     if (!loading && initialGridRef.current) {
       const ctx = gsap.context(() => {
-        const allBoxes = initialGridRef.current.querySelectorAll('.photo-box');
-        
-        gsap.fromTo(allBoxes, 
+        const allBoxes = initialGridRef.current.querySelectorAll(".photo-box");
+
+        gsap.fromTo(
+          allBoxes,
           { opacity: 0, y: 30, scale: 0.9 },
-          { 
-            opacity: 1, 
-            y: 0, 
+          {
+            opacity: 1,
+            y: 0,
             scale: 1,
             duration: 0.6,
             stagger: 0.1,
-            ease: "back.out(1.7)"
+            ease: "back.out(1.7)",
           }
         );
       }, initialGridRef);
@@ -75,23 +77,24 @@ export default function GalleryShowcase() {
 
   // GSAP animation for Recent Event toggle
   useEffect(() => {
-    if (expandedEvent === 'recent' && initialGridRef.current) {
+    if (expandedEvent === "recent" && initialGridRef.current) {
       const ctx = gsap.context(() => {
-        const allBoxes = initialGridRef.current.querySelectorAll('.photo-box');
-        
+        const allBoxes = initialGridRef.current.querySelectorAll(".photo-box");
+
         // Only animate boxes that aren't already visible (index 4+)
         const newBoxes = Array.from(allBoxes).slice(4);
-        
+
         if (newBoxes.length > 0) {
-          gsap.fromTo(newBoxes, 
+          gsap.fromTo(
+            newBoxes,
             { opacity: 0, y: 30, scale: 0.9 },
-            { 
-              opacity: 1, 
-              y: 0, 
+            {
+              opacity: 1,
+              y: 0,
               scale: 1,
               duration: 0.6,
               stagger: 0.1,
-              ease: "back.out(1.7)"
+              ease: "back.out(1.7)",
             }
           );
         }
@@ -108,54 +111,80 @@ export default function GalleryShowcase() {
   return (
     <>
       {/* Recent Event Section with Wave Background */}
-      <div className={`relative w-full overflow-hidden bg-base-200 transition-all duration-700 ease-in-out ${
-        expandedEvent === 'recent' ? 'min-h-screen' : 'h-auto'
-      }`}>
-        <div className={`wave-background absolute top-0 left-0 w-full h-full pointer-events-none z-0 transition-opacity duration-700 ${
-          expandedEvent === 'recent' ? 'opacity-40' : 'opacity-20'
-        }`}>
+      <div
+        className={`relative w-full overflow-hidden bg-base-200 transition-all duration-700 ease-in-out ${
+          expandedEvent === "recent" ? "min-h-screen" : "h-auto"
+        }`}
+      >
+        <div
+          className={`wave-background absolute top-0 left-0 w-full h-full pointer-events-none z-0 transition-opacity duration-700 ${
+            expandedEvent === "recent" ? "opacity-40" : "opacity-20"
+          }`}
+        >
           <WavePattern />
         </div>
-        
-        <div className={`relative z-10 p-8 transition-all duration-700 ${
-          expandedEvent === 'recent' ? 'min-h-screen flex items-center' : 'py-16'
-        }`}>
+
+        <div
+          className={`relative z-10 p-8 transition-all duration-700 ${
+            expandedEvent === "recent" ? "min-h-screen flex items-center" : "py-16"
+          }`}
+        >
           <div className="w-full">
-            <h1 className="text-6xl font-bold text-gray-800 mb-12 text-center">
+            <h1 className="font-corben-reg text-3xl text-gray-800 mb-12 text-center">
               Recent Event
             </h1>
-            
+
             <div className="flex flex-col items-center justify-center">
               {/* Show all photos by default or first 4 when collapsed */}
-              <div ref={initialGridRef} className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+              <div
+                ref={initialGridRef}
+                className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+              >
                 {loading ? (
                   Array.from({ length: 8 }, (_, i) => (
-                    <div key={i} className="w-64 h-64 bg-gray-200 animate-pulse rounded-lg"></div>
+                    <div
+                      key={i}
+                      className="w-64 h-64 bg-gray-200 animate-pulse rounded-lg"
+                    ></div>
                   ))
                 ) : recentEventPhotos.length > 0 ? (
                   // Show all photos when expanded, first 4 when collapsed
                   recentEventPhotos
-                    .slice(0, expandedEvent === 'recent' ? recentEventPhotos.length : 4)
+                    .slice(
+                      0,
+                      expandedEvent === "recent"
+                        ? recentEventPhotos.length
+                        : 4
+                    )
                     .map((photo, index) => (
-                      <div 
+                      <div
                         key={photo.id || index}
                         className="photo-box w-64 h-64 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 hover:scale-105 transform transition-transform"
                         style={{
                           backgroundImage: `url(${photo.url || photo.image_url})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          backgroundColor: '#f3f4f6'
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                          backgroundColor: "#f3f4f6",
                         }}
                       />
                     ))
                 ) : (
                   // Fallback colored boxes - show all 8 when expanded, first 4 when collapsed
-                  Array.from({ 
-                    length: expandedEvent === 'recent' ? 8 : 4 
+                  Array.from({
+                    length: expandedEvent === "recent" ? 8 : 4,
                   }, (_, index) => {
-                    const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FCEA2B', '#FF9FF3', '#54A0FF', '#5F27CD'];
+                    const colors = [
+                      "#FF6B6B",
+                      "#4ECDC4",
+                      "#45B7D1",
+                      "#96CEB4",
+                      "#FCEA2B",
+                      "#FF9FF3",
+                      "#54A0FF",
+                      "#5F27CD",
+                    ];
                     return (
-                      <div 
+                      <div
                         key={index}
                         className="photo-box w-64 h-64 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 hover:scale-105 transform transition-transform"
                         style={{ backgroundColor: colors[index % colors.length] }}
@@ -164,12 +193,12 @@ export default function GalleryShowcase() {
                   })
                 )}
               </div>
-              
-              <button 
-                onClick={() => handleLookClick('recent')}
+
+              <button
+                onClick={() => handleLookClick("recent")}
                 className="btn btn-lg bg-pink-400 hover:bg-pink-500 text-white font-semibold px-12 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-none"
               >
-                {expandedEvent === 'recent' ? 'Show Less' : 'Look!'}
+                {expandedEvent === "recent" ? "Show Less" : "Look!"}
               </button>
             </div>
           </div>
@@ -178,14 +207,14 @@ export default function GalleryShowcase() {
 
       {/* Featured Event Section - With matching background */}
       <div className="min-h-screen w-full bg-gradient-to-b from-base-100 to-base-200">
-        <div className="flex flex-col items-center justify-center min-h-screen px-8 pt-8">
-          <h1 className="text-6xl font-bold text-gray-800 mb-12 text-center">
-            Featured Event
+        <div className="flex flex-col items-center justify-center min-h-screen px-8 py-8">
+          <h1 className="font-corben-reg text-3xl text-gray-800 mb-12 text-center">
+            Event 1
           </h1>
-          
+
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {featuredEventColors.map((color, index) => (
-              <div 
+              <div
                 key={index}
                 className="w-64 h-64 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 hover:scale-105 transform transition-transform"
                 style={{ backgroundColor: color }}
@@ -194,25 +223,29 @@ export default function GalleryShowcase() {
           </div>
 
           {/* Expanded featured photos */}
-          {expandedEvent === 'featured' && (
-            <div ref={expandedGridRef} className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {expandedEvent === "featured" && (
+            <div
+              ref={expandedGridRef}
+              className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+            >
               {Array.from({ length: 8 }, (_, index) => (
-                <div 
+                <div
                   key={`featured-expanded-${index}`}
                   className="expanded-box w-64 h-64 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 hover:scale-105 transform transition-transform"
                   style={{
-                    backgroundColor: featuredEventColors[index % featuredEventColors.length]
+                    backgroundColor:
+                      featuredEventColors[index % featuredEventColors.length],
                   }}
                 />
               ))}
             </div>
           )}
-          
-          <button 
-            onClick={() => handleLookClick('featured')}
+
+          <button
+            onClick={() => handleLookClick("featured")}
             className="btn btn-lg bg-pink-400 hover:bg-pink-500 text-white font-semibold px-12 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-none"
           >
-            {expandedEvent === 'featured' ? 'Show Less' : 'Look!'}
+            {expandedEvent === "featured" ? "Show Less" : "Look!"}
           </button>
         </div>
       </div>

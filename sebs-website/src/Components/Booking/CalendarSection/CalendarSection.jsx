@@ -73,97 +73,104 @@ export default function CalendarSection({ onDateSelect }) {
   };
 
   return (
-    <section className="relative py-16 bg-base-100 text-base-content">
+    <section className="relative py-4 overflow-hidden bg-base-100 text-base-content">
+      {/* Wave Pattern Background */}
       <div className="absolute inset-0 opacity-30">
         <WavePattern />
       </div>
-      <h2 className="text-5xl font-serif font-bold text-primary-content mt-12 mb-10 text-center">
-        Choose a date
-      </h2>
-      <div className="flex flex-wrap justify-center gap-8 w-full max-w-5xl mx-auto items-center">
-        <div className="relative flex items-center w-full justify-center">
-          <button
-            onClick={handlePrev}
-            disabled={isPrevDisabled}
-            className="btn btn-circle btn-sm bg-gray-100 hover:bg-gray-200 disabled:opacity-50 absolute left-0 z-10"
-          >
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+      
+      {/* Content */}
+      <div className="relative z-10">
+        <h2 className="text-5xl font-serif font-bold text-center text-[#0e465a] mt-12 mb-10">
+          Choose a date
+        </h2>
+        <div className="flex flex-wrap justify-center gap-8 w-full max-w-7xl mx-auto items-center mb-12">
+          <div className="relative flex items-center w-full justify-between px-8">
+            <button
+              onClick={handlePrev}
+              disabled={isPrevDisabled}
+              className="btn btn-circle btn-sm bg-gray-100 hover:bg-gray-200 disabled:opacity-50 z-10"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
+            
+            <div className="flex gap-8 transition-transform duration-500 ease-in-out">
+              <CalendarMonth
+                year={startYear}
+                month={startMonth}
+                onDateSelect={handleDateSelect}
+                selectedDate={selectedDate}
               />
-            </svg>
-          </button>
-          <div className="flex gap-8 transition-transform duration-500 ease-in-out">
-            <CalendarMonth
-              year={startYear}
-              month={startMonth}
-              onDateSelect={handleDateSelect}
-              selectedDate={selectedDate}
-            />
-            <CalendarMonth
-              year={startMonth === 11 ? startYear + 1 : startYear}
-              month={startMonth === 11 ? 0 : startMonth + 1}
-              onDateSelect={handleDateSelect}
-              selectedDate={selectedDate}
-            />
+              <CalendarMonth
+                year={startMonth === 11 ? startYear + 1 : startYear}
+                month={startMonth === 11 ? 0 : startMonth + 1}
+                onDateSelect={handleDateSelect}
+                selectedDate={selectedDate}
+              />
+            </div>
+            
+            <button
+              onClick={handleNext}
+              className="btn btn-circle btn-sm bg-gray-100 hover:bg-gray-200 z-10"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
           </div>
-          <button
-            onClick={handleNext}
-            className="btn btn-circle btn-sm bg-gray-100 hover:bg-gray-200 absolute right-0 z-10"
-          >
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
-        </div>
 
-        {/* Selected date confirmation section */}
-        {selectedDate && (
-          <div className="w-full flex flex-col items-center mt-8 space-y-4">
-            <div className="bg-white rounded-lg shadow-md p-6 text-center">
-              <h3 className="text-lg font-semibold text-gray-700 mb-2">
-                Selected Date
-              </h3>
-              <p className="text-xl font-bold text-primary mb-4">
-                {formatSelectedDate(selectedDate)}
-              </p>
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setSelectedDate(null)}
-                  className="btn btn-outline btn-sm"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleConfirmDate}
-                  className="btn btn-primary btn-sm"
-                  style={{ pointerEvents: 'auto', zIndex: 1000 }}
-                  onMouseEnter={() => console.log("Button hovered")}
-                >
-                  Confirm Date
-                </button>
+          {/* Selected date confirmation section */}
+          {selectedDate && (
+            <div className="w-full flex flex-col items-center mt-8 space-y-4">
+              <div className="bg-white rounded-lg shadow-md p-6 text-center">
+                <h3 className="font-corben-reg text-2xl text-gray-700 mb-2">
+                  Selected Date
+                </h3>
+                <p className="text-xl font-bold text-[#f8d1d6] mb-4">
+                  {formatSelectedDate(selectedDate)}
+                </p>
+                <div className="flex justify-center gap-3">
+                  <button
+                    onClick={() => setSelectedDate(null)}
+                    className="btn btn-outline btn-sm text-[#204558] border-[#204558] hover:bg-[#204558] hover:text-white"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleConfirmDate}
+                    className="btn btn-sm bg-[#f8d1d6] text-[#204558] hover:bg-[#f0c4ca] border-[#f8d1d6]"
+                    style={{ pointerEvents: 'auto', zIndex: 1000 }}
+                    onMouseEnter={() => console.log("Button hovered")}
+                  >
+                    Confirm Date
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </section>
   );

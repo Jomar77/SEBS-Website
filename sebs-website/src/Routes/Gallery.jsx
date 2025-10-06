@@ -1,6 +1,6 @@
 // src/components/BentCarousel.js
 
-import GalleryShowcase from "../Components/Gallery/GalleryShowcase";
+import GalleryShowcase from "../Components/Gallery/ShowcaseGallery/GalleryShowcase";
 import CurvedCarousel from "../Components/Gallery/CarouselGallery/ParallaxCarousel";
 import EventPackageSection from "../Components/Common/EventPackageSection/EventPackageSection";
 

@@ -122,9 +122,9 @@ export default function AboutForm() {
             </div>
             <button
               type="button"
-              className="border-[0.5px] border-[#23404a] w-full rounded-xl bg-[#f0a7c2] text-white font-semibold rounded-md hover:bg-white hover:text-[#f0a7c2] transition duration-200"
+              className=" w-full rounded-xl bg-[#f0a7c2] text-white font-semibold rounded-md hover:bg-white hover:text-[#f0a7c2] transition duration-200"
             >
-              Button
+              Confirm
             </button>
           </form>
         </div>

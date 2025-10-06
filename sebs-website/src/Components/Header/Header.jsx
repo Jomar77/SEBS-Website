@@ -9,7 +9,7 @@ export default function Header() {
       <div className="bg-[#8fc2c3] h-5 w-full" />
 
       {/* Main header */}
-      <div className="flex items-center justify-between px-9 py-6 bg-[#fff]">
+      <div className="flex items-center justify-between px-9 py-5 bg-[#fff]">
         {/* Search icon */}
         <div className="flex-1 flex items-center">
           <FaMagnifyingGlass className="text-xl text-teal-900" />
@@ -17,9 +17,9 @@ export default function Header() {
         {/* Logo */}
         <div className="flex-1 flex justify-center">
           <img 
-            src="/public/img/P&P New.png"
+            src="/public/img/PnP.JPG"
             alt="Psalm & Platter" 
-            className="h-12 w-auto"
+            className="h-16 w-auto"
           />
         </div>
         {/* Social icons */}

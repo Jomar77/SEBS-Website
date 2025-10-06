@@ -77,15 +77,15 @@ const CarouselWithMask = ({ panels }) => {
   return (
     <div 
       ref={carouselRef}
-      className="relative w-full bg-white py-16 overflow-hidden"
+      className="relative w-full bg-white pt-10 overflow-hidden"
     >
       {/* Gallery Title */}
       <div className="text-center mb-2 relative z-20">
-        <h2 className="font-yeseva text-4xl lg:text-5xl text-[#204558]">Gallery</h2>
+        <h2 className="font-yeseva text-4xl lg:text-5xl text-[#0e465a]">Gallery</h2>
       </div>
 
       {/* Carousel container - adjusted positioning */}
-      <div className="relative z-10 w-full h-80 px-0 -mt-2">
+      <div className="relative z-10 w-full h-70 pb-15 px-0 -mt-2">
         <div 
           ref={containerRef}
           className="flex justify-center items-center h-full overflow-hidden"

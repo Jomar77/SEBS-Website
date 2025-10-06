@@ -84,7 +84,7 @@ export default function GallerySection() {
 			<div className="container mx-auto px-4 max-w-7xl">
 				<div ref={carouselRef} className="relative">
 					<button
-						className="btn btn-circle bg-[#f0a7c2] border-none text-black hover:bg-[#f0a7c2]/80 shadow-lg disabled:opacity-30 active:scale-100 absolute left-4 top-1/2 z-10"
+						className="btn btn-circle bg-[#f0a7c2] border-none text-black hover:bg-[#f0a7c2]/80 shadow-lg disabled:opacity-30 active:scale-100 absolute -left-16 top-1/2 z-10"
 						onClick={prevSlide}
 						disabled={currentSlide === 0}
 						aria-label="Previous slide"
@@ -105,7 +105,7 @@ export default function GallerySection() {
 					</button>
 
 					<button
-						className="btn btn-circle bg-pink-200 border-none text-black hover:bg-pink-300 shadow-lg disabled:opacity-30 active:scale-100 absolute right-4 top-1/2 z-10"
+						className="btn btn-circle bg-pink-200 border-none text-black hover:bg-pink-300 shadow-lg disabled:opacity-30 active:scale-100 absolute -right-16 top-1/2 z-10"
 						onClick={nextSlide}
 						disabled={currentSlide >= maxSlide}
 						aria-label="Next slide"
