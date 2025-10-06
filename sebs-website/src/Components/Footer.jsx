@@ -48,7 +48,7 @@ export default function Footer() {
                   href="mailto:psalmandplatter@gmail.com"
                   className="underline"
                 >
-                  info@colorfulevents.com
+                  faith@psalmandplatter.com
                 </a>
               </div>
             </div>

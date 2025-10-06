@@ -12,7 +12,7 @@ export default function Header() {
       <div className="flex items-center justify-between px-9 py-5 bg-[#fff]">
         {/* Search icon */}
         <div className="flex-1 flex items-center">
-          <FaMagnifyingGlass className="text-xl text-teal-900" />
+          
         </div>
         {/* Logo */}
         <div className="flex-1 flex justify-center">
@@ -24,7 +24,7 @@ export default function Header() {
         </div>
         {/* Social icons */}
         <div className="flex-1 flex justify-end space-x-2">
-          <a href="#" aria-label="Facebook">
+          <a href="https://www.facebook.com/psalmandplatternz" aria-label="Facebook">
             <FaFacebookSquare className="text-2xl text-[#ffba51]" />
           </a>
           <a href="#" aria-label="Instagram">
