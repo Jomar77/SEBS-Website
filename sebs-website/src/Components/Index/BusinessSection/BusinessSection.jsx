@@ -3,10 +3,10 @@ export default function BusinessSection() {
     <section className="w-full py-16 bg-[#fff]">
       <div className="max-w-7xl mx-auto px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Business Card 1 */}
+          {/* Business Card 1 - FIX: Remove /public/ prefix */}
           <div className="bg-[#f5f1e8] p-8 flex items-center justify-center h-48">
             <img 
-              src="public/img/IMG_2719.png"
+              src="/img/IMG_2719.PNG"
               alt="Psalm & Platter Logo" 
               className="w-50 h-50 object-contain"
               loading="lazy"
@@ -22,7 +22,7 @@ export default function BusinessSection() {
               loading="lazy"
             />
           </div>
-          
+
           {/* Business Card 3 */}
           <div className="bg-[#f5f1e8] p-8 flex items-center justify-center h-48">
             <img 
