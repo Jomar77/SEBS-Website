@@ -29,23 +29,8 @@ const BookingFormSection = ({ onSubmit, selectedService, selectedDate }) => {
       alert("Please select an event date.");
       return;
     }
-    
-    // Format data to match backend expectations
-    const bookingData = {
-      customerName: form.name,
-      customerEmail: form.email,
-      customerPhone: form.contact,
-      eventDate: selectedDate.toISOString().split('T')[0], // Just the date part: "2025-11-17"
-      location: form.address,
-      eventTime: form.time,
-      serviceId: selectedService.id, // Simple service ID
-      duration: parseInt(duration),
-      paymentMethod: payment,
-      notes: `Duration: ${duration} hours. Payment: ${payment}. Time: ${form.time}`
-    };
-    
-    console.log('Submitting booking data:', bookingData);
-    onSubmit(bookingData);
+    e.preventDefault();
+    onSubmit({ ...form, duration, payment, selectedDate });
   };
 
   // Format date for display
