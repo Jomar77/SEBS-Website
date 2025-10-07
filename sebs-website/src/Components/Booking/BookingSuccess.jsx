@@ -24,32 +24,33 @@ export default function BookingSuccess() {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 text-center max-w-2xl mx-auto p-8">
+      <div className="relative z-10 flex flex-col items-center w-full min-h-screen py-12">
 
-        {/* Booking Confirmation Card */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-6 border-2 border-gray-200 text-left">
-          <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
-            <FontAwesomeIcon icon={faClipboardList} className="text-2xl text-[#efaac3]" />
-            <h2 className="text-2xl font-montserrat-alt font-bold text-[#efaac3]">Booking Details</h2>
+        {/* Receipt Card */}
+        <div className="bg-white w-full max-w-md rounded-xl shadow-lg border border-dashed border-[#a8a29e] px-8 py-10 flex flex-col gap-6">
+          {/* Header */}
+          <div className="text-center mb-2">
+            <h2 className="font-yeseva text-2xl text-[#204558] tracking-wide mb-1">Booking Receipt</h2>
+            <div className="text-xs text-[#a8a29e]">{new Date().toLocaleString()}</div>
           </div>
 
           {/* Business Details */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-sm">
-            <div>
+          <div className="grid grid-cols-1 gap-2 text-sm">
+            <div className="flex justify-between">
               <span className="font-semibold text-gray-700">Business name:</span>
-              <span className="ml-2 text-[#79803c]">SEBS Event Planning</span>
+              <span className="text-[#79803c]">SEBS Event Planning</span>
             </div>
-            <div>
+            <div className="flex justify-between">
               <span className="font-semibold text-gray-700">Email:</span>
-              <span className="ml-2 text-[#79803c]">{booking.form?.email || "your email"}</span>
+              <span className="text-[#79803c]">{booking.form?.email || "your email"}</span>
             </div>
-            <div>
+            <div className="flex justify-between">
               <span className="font-semibold text-gray-700">Phone Number:</span>
-              <span className="ml-2 text-[#79803c]">{booking.form?.contact || "your phone"}</span>
+              <span className="text-[#79803c]">{booking.form?.contact || "your phone"}</span>
             </div>
-            <div>
+            <div className="flex justify-between">
               <span className="font-semibold text-gray-700">Booking Date:</span>
-              <span className="ml-2 text-[#79803c]">
+              <span className="text-[#79803c]">
                 {booking.date ? booking.date.toLocaleDateString('en-US') : "your selected date"}
               </span>
             </div>
@@ -57,117 +58,106 @@ export default function BookingSuccess() {
 
           {/* Booking Reference */}
           {booking.bookingReference && (
-            <div className="mb-6">
+            <div className="flex justify-between items-center py-2 border-y border-dashed border-[#e5aac3]">
               <span className="font-semibold text-gray-700">Booking Number:</span>
-              <span className="ml-2 font-mono text-[#79803c] font-bold">
+              <span className="font-mono text-[#79803c] font-bold text-2xl tracking-widest">
                 {booking.bookingReference}
               </span>
             </div>
           )}
 
           {/* Personalized Message */}
-          <div className="mb-6">
-            <p className="text-gray-700">
-              <span className="font-semibold">Dear {booking.form?.name || "Valued Customer"},</span>
-            </p>
-            <p className="mt-2 text-gray-700">
-              We are thrilled to receive your booking with <span className="font-semibold"> SEBS Event Planning </span> 
-              for your upcoming event. Below are your booking details.
-            </p>
+          <div className="text-sm text-gray-700 italic">
+            Dear <span className="font-semibold">{booking.form?.name || "Valued Customer"}</span>,<br />
+            We thank you for choosing <span className="font-semibold">SEBS Event Planning</span>.<br />
+            Below are your booking details.
           </div>
 
           {/* Service Details Table */}
-          <div className="border border-gray-300 rounded-lg overflow-hidden mb-6">
-            <div className="bg-gray-100 grid grid-cols-2 font-semibold text-gray-700 border-b border-gray-300">
-              <div className="p-3 text-left">Service</div>
-              <div className="p-3 text-left">Details</div>
-            </div>
-            
-            <div className="grid grid-cols-2 border-b border-gray-200">
-              <div className="p-3 flex items-center gap-2">
-                <FontAwesomeIcon icon={faRibbon} className="text-lg text-[#fb8950]" />
-                <span className="font-medium text-[#79803c]">Service Booked</span>
-              </div>
-              <div className="p-3 text-[#79803c]">{booking.service?.title || "your Selected Service"}</div>
-            </div>
-            
-            <div className="grid grid-cols-2 border-b border-gray-200">
-              <div className="p-3 flex items-center gap-2">
-                <FontAwesomeIcon icon={faCalendarDays} className="text-lg text-[#ffc571]" />
-                <span className="font-medium text-[#79803c]">Event Date</span>
-              </div>
-              <div className="p-3 text-[#79803c]">
-                {booking.date ? booking.date.toLocaleDateString('en-US', {
-                  weekday: 'long',
-                  year: 'numeric', 
-                  month: 'long',
-                  day: 'numeric'
-                }) : "your selected date"}
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-2 border-b border-gray-200">
-              <div className="p-3 flex items-center gap-2">
-                <FontAwesomeIcon icon={faClock} className="text-lg text-[#efaac3]" />
-                <span className="font-medium text-[#79803c]">Event Time</span>
-              </div>
-              <div className="p-3 text-[#79803c]">{booking.form?.time || "to be confirmed"}</div>
-            </div>
-            
-            <div className="grid grid-cols-2 border-b border-gray-200">
-              <div className="p-3 flex items-center gap-2">
-                <FontAwesomeIcon icon={faLocationDot} className="text-lg text-[#8fc2c3]" />
-                <span className="font-medium text-[#79803c]">Venue</span>
-              </div>
-              <div className="p-3 text-[#79803c]">
-                {booking.form?.address || booking.bookingResponse?.eventDetails?.location || "to be confirmed"}
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-2 border-b border-gray-200">
-              <div className="p-3 flex items-center gap-2">
-                <FontAwesomeIcon icon={faDollarSign} className="text-lg text-[#fb8950]" />
-                <span className="font-medium text-[#79803c]">Total Amount</span>
-              </div>
-              <div className="p-3 font-semibold text-[#79803c]">{booking.service?.price || "to be quoted"}</div>
-            </div>
-            
-            <div className="grid grid-cols-2 border-b border-gray-200">
-              <div className="p-3 flex items-center gap-2">
-                <FontAwesomeIcon icon={faCheckCircle} className="text-lg text-[#ffc571]" />
-                <span className="font-medium text-[#79803c]">Status</span>
-              </div>
-              <div className="p-3 text-[#79803c]">
-                {booking.bookingResponse?.status === 1 ? "Awaiting Confirmation" : "Pending Review"}
-              </div>
-            </div>
+          <div className="w-full">
+            <table className="w-full text-sm border-separate border-spacing-y-2">
+              <thead>
+                <tr>
+                  <th className="text-left font-yeseva text-[#204558] pb-2">Service</th>
+                  <th className="text-left font-yeseva text-[#204558] pb-2">Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="font-medium text-[#79803c] flex items-center gap-2">
+                    <FontAwesomeIcon icon={faRibbon} className="text-xl text-[#fb8950]" />
+                    Service Booked
+                  </td>
+                  <td className="text-[#79803c]">{booking.service?.title || "your Selected Service"}</td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-[#79803c] flex items-center gap-2">
+                    <FontAwesomeIcon icon={faCalendarDays} className="text-xl text-[#ffc571]" />
+                    Event Date
+                  </td>
+                  <td className="text-[#79803c]">
+                    {booking.date ? booking.date.toLocaleDateString('en-US', {
+                      weekday: 'long',
+                      year: 'numeric', 
+                      month: 'long',
+                      day: 'numeric'
+                    }) : "your selected date"}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-[#79803c] flex items-center gap-2">
+                    <FontAwesomeIcon icon={faClock} className="text-xl text-[#efaac3]" />
+                    Event Time
+                  </td>
+                  <td className="text-[#79803c]">{booking.form?.time || "to be confirmed"}</td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-[#79803c] flex items-center gap-2">
+                    <FontAwesomeIcon icon={faLocationDot} className="text-xl text-[#8fc2c3]" />
+                    Venue
+                  </td>
+                  <td className="text-[#79803c]">
+                    {booking.form?.address || booking.bookingResponse?.eventDetails?.location || "to be confirmed"}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-[#79803c] flex items-center gap-2">
+                    <FontAwesomeIcon icon={faDollarSign} className="text-xl text-[#fb8950]" />
+                    Total Amount
+                  </td>
+                  <td className="font-semibold text-[#79803c]">{booking.service?.price || "to be quoted"}</td>
+                </tr>
+                <tr>
+                  <td className="font-medium text-[#79803c] flex items-center gap-2">
+                    <FontAwesomeIcon icon={faCheckCircle} className="text-xl text-[#ffc571]" />
+                    Status
+                  </td>
+                  <td className="text-[#79803c]">
+                    {booking.bookingResponse?.status === 1 ? "Awaiting Confirmation" : "Pending Review"}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
-          <div className="text-center text-gray-700 font-medium">
-            Thank you for trusting us. We look forward to being part of your celebration!
+          {/* Footer */}
+          <div className="text-center text-gray-700 font-medium pt-4 border-t border-dashed border-[#e5aac3]">
+            Thank you for trusting us.<br />We look forward to being part of your celebration!
           </div>
         </div>
 
-        {/* Contact Information */}
-        <div className="text-center text-sm text-gray-600 mb-8">
+        {/* Contact Information & Action Button */}
+        <div className="text-center text-sm text-gray-600 mt-8">
           <p className="mb-2">We'll contact you shortly to confirm the details and arrange payment.</p>
           <p>You should receive a confirmation email at <span className="font-semibold">{booking.form?.email || "your email address"}</span></p>
         </div>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
           <Link 
             to="/" 
             className="btn bg-[#79803c] text-white hover:bg-[#79803c]/80 border-none px-8"
           >
             Return to Home
           </Link>
-          <button 
-            onClick={() => window.print()} 
-            className="btn btn-outline border-[#79803c] text-[#79803c] hover:bg-[#79803c] hover:text-white px-8"
-          >
-            Print Details
-          </button>
         </div>
       </div>
     </div>
