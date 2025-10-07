@@ -17,7 +17,7 @@ export default function Header() {
         {/* Logo */}
         <div className="flex-1 flex justify-center">
           <img 
-            src="/public/img/PnP.JPG"
+            src="/img/PnP.JPG"
             alt="Psalm & Platter" 
             className="h-16 w-auto"
           />

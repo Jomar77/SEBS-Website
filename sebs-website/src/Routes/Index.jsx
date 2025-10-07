@@ -17,7 +17,7 @@ export default function Index() {
             {/* Logo Image */}
             <div className="flex justify-center">
               <img
-                src="/public/img/IMG_2423.png"
+                src="/img/IMG_2423.PNG"
                 alt="Psalm & Platter"
                 className="h-100 w-auto"
                 loading="lazy"
