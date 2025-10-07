@@ -6,7 +6,7 @@ export default function BookingLanding() {
   return (
     <div className="relative min-h-screen flex bg-base-100 overflow-hidden">
       {/* Left Side - Content */}
-      <div className="w-1/2 flex items-center justify-center bg-[#f5f1eb] p-8">
+      <div className="w-1/2 flex items-center justify-center bg-base-200 p-8">
         <div className="max-w-md text-center">
           <h1 className="font-yeseva text-4xl mb-6 text-[#8b4a6b] leading-tight">
             <span className="text-[#efaac3]">B</span>
