@@ -30,36 +30,42 @@ export default function GallerySection() {
 
 	useEffect(() => {
 		const ctx = gsap.context(() => {
-			gsap.fromTo(
-				carouselRef.current,
-				{ opacity: 0, y: 100 },
-				{
-					opacity: 1,
-					y: 0,
-					duration: 1.2,
-					delay: 0.3,
-					ease: "power2.out",
-					scrollTrigger: {
-						trigger: carouselRef.current,
-						start: "top 80%",
-					},
-				}
-			);
-			gsap.fromTo(
-				buttonRef.current,
-				{ opacity: 0, scale: 0.8 },
-				{
-					opacity: 1,
-					scale: 1,
-					duration: 0.8,
-					delay: 0.6,
-					ease: "back.out(1.7)",
-					scrollTrigger: {
-						trigger: buttonRef.current,
-						start: "top 80%",
-					},
-				}
-			);
+			// Add null checks before creating animations
+			if (carouselRef.current) {
+				gsap.fromTo(
+					carouselRef.current,
+					{ opacity: 0, y: 100 },
+					{
+						opacity: 1,
+						y: 0,
+						duration: 1.2,
+						delay: 0.3,
+						ease: "power2.out",
+						scrollTrigger: {
+							trigger: carouselRef.current,
+							start: "top 80%",
+						},
+					}
+				);
+			}
+
+			if (buttonRef.current) {
+				gsap.fromTo(
+					buttonRef.current,
+					{ opacity: 0, scale: 0.8 },
+					{
+						opacity: 1,
+						scale: 1,
+						duration: 0.8,
+						delay: 0.6,
+						ease: "back.out(1.7)",
+						scrollTrigger: {
+							trigger: buttonRef.current,
+							start: "top 80%",
+						},
+					}
+				);
+			}
 		}, sectionRef);
 		return () => ctx.revert();
 	}, []);

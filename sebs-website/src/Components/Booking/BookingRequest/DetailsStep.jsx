@@ -16,8 +16,8 @@ export default function DetailsStep() {
       customerEmail: formData.email,
       customerPhone: formData.contact,
       eventDate: booking.date
-        ? booking.date.toISOString()
-        : new Date().toISOString(),
+        ? booking.date.toISOString().split('T')[0] // Just date: "2025-11-17"
+        : new Date().toISOString().split('T')[0],
       location: formData.address,
       eventType: 1,
       eventName: `${booking.service?.title || "Event"} - ${

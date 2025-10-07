@@ -13,7 +13,39 @@ const BookingFormSection = ({ onSubmit, selectedService, selectedDate }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ ...form, duration, payment, selectedDate });
+    
+    // Validate required fields
+    if (!form.email || !form.name || !form.contact || !form.address || !form.time) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+    
+    if (!selectedService?.id) {
+      alert("Please select a service first.");
+      return;
+    }
+    
+    if (!selectedDate) {
+      alert("Please select an event date.");
+      return;
+    }
+    
+    // Format data to match backend expectations
+    const bookingData = {
+      customerName: form.name,
+      customerEmail: form.email,
+      customerPhone: form.contact,
+      eventDate: selectedDate.toISOString().split('T')[0], // Just the date part: "2025-11-17"
+      location: form.address,
+      eventTime: form.time,
+      serviceId: selectedService.id, // Simple service ID
+      duration: parseInt(duration),
+      paymentMethod: payment,
+      notes: `Duration: ${duration} hours. Payment: ${payment}. Time: ${form.time}`
+    };
+    
+    console.log('Submitting booking data:', bookingData);
+    onSubmit(bookingData);
   };
 
   // Format date for display
@@ -158,7 +190,7 @@ const BookingFormSection = ({ onSubmit, selectedService, selectedDate }) => {
               onChange={e => setForm({ ...form, time: e.target.value })}
             />
           </div>
-          <button type="submit" className="mt-1 py-2 w-full rounded-xl bg-[#f0a7c2] text-white font-semibold rounded-md hover:bg-white hover:text-[#f0a7c2] transition duration-200">
+          <button type="submit" className="mt-1 py-2 w-full rounded-xl bg-[#f0a7c2] text-white font-semibold rounded-md hover:bg-base-200 hover:text-[#f0a7c2] transition duration-200">
             Confirm
           </button>
         </form>

@@ -7,16 +7,16 @@ export default function ServiceShowcaseCard({
   colorClass,
 }) {
   return (
-    <div className="bg-[#fff] border-20 border-white shadow-lg flex flex-col overflow-hidden w-full max-w-[350px] lg:max-w-none lg:flex-1 min-h-[480px]">
+    <div className="bg-[#fff] border-20 border-white shadow-lg flex flex-col overflow-hidden w-full max-w-[350px] lg:max-w-none lg:flex-1 h-[480px]">
       {/* Color/Image Block */}
       <div className={`w-full h-50 ${colorClass}`} />
 
       {/* Card Body */}
       <div className="p-6 text-center flex flex-col flex-1">
-        <h3 className="font-corben-bold text-xl text-[#204558] mb-2 font-bold">
+        <h3 className="font-corben-bold text-xl text-[#204558] mb-2 font-bold truncate">
           {title}
         </h3>
-        <p className="font-montserrat-alt text-sm text-[#204558] opacity-80 mb-6 leading-tight">
+        <p className="font-montserrat-alt text-sm text-[#204558] opacity-80 mb-6 leading-tight flex-1 overflow-hidden text-ellipsis line-clamp-4">
           {description}
         </p>
         <div className="mt-auto">

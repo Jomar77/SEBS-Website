@@ -4,26 +4,16 @@ import AnimatedBackground from "../Index/AnimatedBackground/AnimatedBackground";
 
 export default function BookingLanding() {
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-base-100 overflow-hidden">
-      {/* Animated Background */}
-      <AnimatedBackground />
-      
-      <div className="relative z-10 text-center max-w-4xl mx-auto p-8">
-        {/* White background container matching reference */}
-        <div className="bg-white rounded-3xl shadow-xl p-12 relative border-4 border-gray-100">
-          {/* Decorative border lines */}
-          <div className="absolute top-4 left-4 right-4 h-0.5 bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
-          <div className="absolute bottom-4 left-4 right-4 h-0.5 bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
-          <div className="absolute top-4 bottom-4 left-4 w-0.5 bg-gradient-to-b from-transparent via-gray-200 to-transparent"></div>
-          <div className="absolute top-4 bottom-4 right-4 w-0.5 bg-gradient-to-b from-transparent via-gray-200 to-transparent"></div>
-          
-          <h1 className="font-bold font-yeseva text-7xl mb-2 tracking-wider">
+    <div className="relative min-h-screen flex bg-base-100 overflow-hidden">
+      {/* Left Side - Content */}
+      <div className="w-1/2 flex items-center justify-center bg-[#f5f1eb] p-8">
+        <div className="max-w-md text-center">
+          <h1 className="font-yeseva text-4xl mb-6 text-[#8b4a6b] leading-tight">
             <span className="text-[#efaac3]">B</span>
             <span className="text-[#ffba51]">O</span>
             <span className="text-[#8fc2c3]">O</span>
             <span className="text-[#fcc8ba]">K</span>
-          </h1>
-          <h2 className="font-bold  font-yeseva text-7xl mb-8 tracking-wider">
+            <br />
             <span className="text-[#8fc2c3]">W</span>
             <span className="text-[#fcc8ba]">I</span>
             <span className="text-[#ffba51]">T</span>
@@ -31,27 +21,38 @@ export default function BookingLanding() {
             <span className="text-[#8fc2c3]"> </span>
             <span className="text-[#ffba51]">U</span>
             <span className="text-[#fcc8ba]">S</span>
-          </h2>
+          </h1>
+          
+          <p className="font-montserrat-alt text-sm text-[#8b4a6b] mb-8 leading-relaxed">
+            From elegant grazing carts and interactive photobooths to trendy matcha stations, we bring the most popular event experiences to your celebration. Let us create unforgettable moments that your guests will be talking about long after the party ends.
+          </p>
 
           <Link
             to="/booking/service"
-            className="bg-[#efaac3] hover:bg-[#e89bb4] text-white font-bold py-2 px-6 rounded-full text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block mb-5 tracking-wide"
+            className="bg-[#efaac3] hover:bg-[#e89bb4] text-white font-semibold py-3 px-8 rounded-full text-sm uppercase tracking-wider transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block mb-8"
           >
-            START BOOKING
+            Start Booking
           </Link>
           
-          <div className="pt-4 border-t border-gray-200 mt-2">
-            <p className="font-corben-reg text-lg text-[#0e465a] mb-6">
+          <div className="pt-6 border-t border-[#8b4a6b]/20">
+            <p className="font-montserrat-alt text-sm text-[#8b4a6b] mb-4">
               Already have a booking with us?
             </p>
             <Link
               to="/booking/manage"
-              className="btn btn-outline border-2 border-[#efaac3] text-[#efaac3] hover:bg-[#efaac3] hover:text-white transition-all duration-300 hover:scale-105 px-8 py-2 rounded-full"
+              className="text-[#efaac3] hover:text-[#e89bb4] font-semibold text-sm underline transition-colors duration-300"
             >
               Manage Your Booking
             </Link>
           </div>
         </div>
+      </div>
+
+      {/* Right Side - Animated Background */}
+      <div className="w-1/2 relative">
+        <AnimatedBackground />
+        {/* Overlay to make background more colorful/abstract */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#ffba51]/30 via-[#8fc2c3]/30 to-[#efaac3]/30 mix-blend-overlay"></div>
       </div>
     </div>
   );

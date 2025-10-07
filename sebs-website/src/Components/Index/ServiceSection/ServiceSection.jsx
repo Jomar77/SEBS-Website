@@ -17,54 +17,61 @@ export default function ServiceSection() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Animate title with enhanced entrance
-      gsap.fromTo(
-        titleRef.current,
-        { opacity: 0, y: 50, scale: 0.8 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1.2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: titleRef.current,
-            start: "top 80%",
-            end: "bottom 50%",
-          },
-        }
-      );
+      if (titleRef.current) {
+        gsap.fromTo(
+          titleRef.current,
+          { opacity: 0, y: 50, scale: 0.8 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1.2,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: titleRef.current,
+              start: "top 80%",
+              end: "bottom 50%",
+            },
+          }
+        );
+      }
 
-      // Enhanced staggered card reveals
-      gsap.fromTo(
-        cardsRef.current.children,
-        { opacity: 0, y: 100, scale: 0.8, rotateX: 45 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          rotateX: 0,
-          duration: 1,
-          stagger: 0.3,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: cardsRef.current,
-            start: "top 80%",
-            end: "bottom 20%",
-          },
-        }
-      );
+      // Enhanced staggered card reveals - add null check
+      if (cardsRef.current && cardsRef.current.children) {
+        gsap.fromTo(
+          cardsRef.current.children,
+          { opacity: 0, y: 100, scale: 0.8, rotateX: 45 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            rotateX: 0,
+            duration: 1,
+            stagger: 0.3,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: cardsRef.current,
+              start: "top 80%",
+              end: "bottom 20%",
+            },
+          }
+        );
+      }
 
-      // Background parallax effect
-      gsap.to(sectionRef.current.querySelector(".wave-background"), {
-        yPercent: -20,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
+      // Background parallax effect - add null check
+      const waveElement = sectionRef.current?.querySelector(".wave-background");
+      if (waveElement) {
+        gsap.to(waveElement, {
+          yPercent: -20,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
     }, sectionRef);
 
     return () => ctx.revert();

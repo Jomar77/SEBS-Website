@@ -140,14 +140,7 @@ export default function GalleryShowcase() {
                 ref={initialGridRef}
                 className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
               >
-                {loading ? (
-                  Array.from({ length: 8 }, (_, i) => (
-                    <div
-                      key={i}
-                      className="w-64 h-64 bg-gray-200 animate-pulse rounded-lg"
-                    ></div>
-                  ))
-                ) : recentEventPhotos.length > 0 ? (
+                {recentEventPhotos.length > 0 ? (
                   // Show all photos when expanded, first 4 when collapsed
                   recentEventPhotos
                     .slice(
@@ -168,8 +161,8 @@ export default function GalleryShowcase() {
                         }}
                       />
                     ))
-                ) : (
-                  // Fallback colored boxes - show all 8 when expanded, first 4 when collapsed
+                ) : !loading ? (
+                  // Only show fallback colored boxes if not loading and no photos
                   Array.from({
                     length: expandedEvent === "recent" ? 8 : 4,
                   }, (_, index) => {
@@ -191,7 +184,7 @@ export default function GalleryShowcase() {
                       />
                     );
                   })
-                )}
+                ) : null}
               </div>
 
               <button
