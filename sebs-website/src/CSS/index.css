@@ -116,3 +116,16 @@
 .font-corben-reg {
   font-family: 'Corben', serif;
 }
+
+@font-face {
+  font-family: 'Kiotto';
+  src: url('/fonts/Kiotto/KiottoDemo-pgo11.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-kiotto {
+  font-family: 'Kiotto', cursive, sans-serif;
+}
+
+

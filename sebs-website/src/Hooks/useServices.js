@@ -15,14 +15,13 @@ export function useServices() {
             title: service.name,
             description: service.description,
             basePrice: service.basePrice,
-            colorClass:
-              service.name.includes("Photobooth")
-                ? "bg-[#ffc571]"
-                : service.name.includes("Grazing")
-                ? "bg-[#f3794c]"
-                : service.name.includes("Design")
-                ? "bg-[#efaac3]"
-                : "bg-[#8fc2c3]",
+            colorClass: service.name.includes("Photobooth")
+              ? "bg-[#ffc571]"
+              : service.name.includes("Grazing")
+              ? "bg-[#f3794c]"
+              : service.name.includes("Design")
+              ? "bg-[#efaac3]"
+              : "bg-[#8fc2c3]",
           }))
         );
         setLoading(false);

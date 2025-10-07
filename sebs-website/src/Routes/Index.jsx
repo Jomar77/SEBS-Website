@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import GallerySection from "../Components/Index/GallerySection/GallerySection";
 import ServiceSection from "../Components/Index/ServiceSection/ServiceSection";
 import EventPackageSection from "../Components/Common/EventPackageSection/EventPackageSection";
@@ -12,31 +13,25 @@ export default function Index() {
         <AnimatedBackground />
         <div className="relative z-10 max-w-2xl mx-auto px-8">
           {/* White background card */}
-          <div className="bg-white rounded-3xl shadow-2xl p-12 text-center">
-            <div className="mb-8">
-              <h1 className="text-6xl font-bold mb-4">
-                <span className="text-[#efaac3]">Psalm</span>
-              </h1>
-              <h2 className="text-5xl font-bold leading-tight">
-                <span className="text-[#8fc2c3]">&</span>
-                <span className="text-[#efaac3]"> </span>
-                <span className="text-[#ffc571]">P</span>
-                <span className="text-[#8fc2c3]">l</span>
-                <span className="text-[#fb8950]">a</span>
-                <span className="text-[#efaac3]">t</span>
-                <span className="text-[#ffc571]">t</span>
-                <span className="text-[#fb8950]">e</span>
-                <span className="text-[#efaac3]">r</span>
-              </h2>
-              <p className="text-2xl text-[#ffc571] font-script mt-4 italic">
-                something
-              </p>
+          <div className="bg-white/80 rounded-3xl shadow-2xl p-2 text-center">
+            {/* Logo Image */}
+            <div className="flex justify-center">
+              <img
+                src="/public/img/IMG_2423.png"
+                alt="Psalm & Platter"
+                className="h-100 w-auto"
+              />
             </div>
+          </div>
 
-            {/* Pink Book Now button */}
-            <button className="bg-[#efaac3] hover:bg-[#e89bb4] text-white font-bold py-4 px-12 rounded-full text-xl transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+          {/* Pink Book Now button - outside container, centered */}
+          <div className="flex justify-center mt-8">
+            <Link
+              to="/booking"
+              className="bg-[#efaac3] hover:bg-[#e89bb4] text-white font-bold py-4 px-12 rounded-full text-xl transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block"
+            >
               BOOK NOW
-            </button>
+            </Link>
           </div>
         </div>
       </section>

@@ -55,11 +55,11 @@ export default function EventPackageSection() {
 
           {/* Desktop: Custom carousel */}
           <div className="hidden lg:flex items-center">
-            <div className="carousel w-full max-w-md overflow-hidden">
+            <div className="carousel overflow-hidden" style={{ width: '408px' }}> {/* Reduced from 432px to hide shadow bleeding */}
               <div
-                className="flex gap-4 transition-transform duration-300 ease-in-out"
+                className="flex gap-6 transition-transform duration-300 ease-in-out"
                 style={{
-                  transform: `translateX(-${currentIndex * (192 + 16)}px)`,
+                  transform: `translateX(-${currentIndex * (192 + 24)}px)`,
                 }}
               >
                 {packages.map((pkg, i) => (

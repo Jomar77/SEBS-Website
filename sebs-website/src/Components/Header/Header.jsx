@@ -9,20 +9,22 @@ export default function Header() {
       <div className="bg-[#8fc2c3] h-5 w-full" />
 
       {/* Main header */}
-      <div className="flex items-center justify-between px-9 py-6 bg-[#fff]">
+      <div className="flex items-center justify-between px-9 py-5 bg-[#fff]">
         {/* Search icon */}
         <div className="flex-1 flex items-center">
-          <FaMagnifyingGlass className="text-xl text-teal-900" />
+          
         </div>
         {/* Logo */}
         <div className="flex-1 flex justify-center">
-          <span className="text-4xl font-yeseva text-primary-content">
-            Psalm & Platter
-          </span>
+          <img 
+            src="/public/img/PnP.JPG"
+            alt="Psalm & Platter" 
+            className="h-16 w-auto"
+          />
         </div>
         {/* Social icons */}
         <div className="flex-1 flex justify-end space-x-2">
-          <a href="#" aria-label="Facebook">
+          <a href="https://www.facebook.com/psalmandplatternz" aria-label="Facebook">
             <FaFacebookSquare className="text-2xl text-[#ffba51]" />
           </a>
           <a href="#" aria-label="Instagram">

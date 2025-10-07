@@ -2,7 +2,6 @@
 
 import GalleryShowcase from "../Components/Gallery/ShowcaseGallery/GalleryShowcase";
 import CurvedCarousel from "../Components/Gallery/CarouselGallery/ParallaxCarousel";
-import RecentEvent from "../Components/Gallery/RecentEvent";
 import EventPackageSection from "../Components/Common/EventPackageSection/EventPackageSection";
 
 export default function Gallery() {
@@ -22,8 +21,7 @@ export default function Gallery() {
     <>
       <div>
         <CurvedCarousel panels={galleryPanels} />
-        <RecentEvent />
-        <GalleryShowcase />
+         <GalleryShowcase />
         <EventPackageSection />
       </div>
     </>

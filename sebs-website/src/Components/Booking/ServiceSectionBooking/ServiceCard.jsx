@@ -3,9 +3,7 @@ import React from "react";
 export default function ServiceCard({ price, title, desc, highlight, onClick }) {
   return (
     <div
-      className={`relative bg-white p-4 shadow-lg  flex flex-col justify-center items-center cursor-pointer text-center transition-all duration-300 hover:scale-105 hover:bg-[#eea9c2] hover:shadow-2xl ${
-        highlight ? "ring-2 ring-primary" : ""
-      }`}
+      className={`relative bg-white p-4 shadow-lg flex flex-col justify-center items-center cursor-pointer text-center transition-all duration-300 hover:scale-105 hover:bg-[#eea9c2] hover:shadow-2xl`}
       style={{
         width: "280px",
         borderRadius: "2px",
@@ -23,12 +21,12 @@ export default function ServiceCard({ price, title, desc, highlight, onClick }) 
         </div>
 
         {/* Title */}
-        <div className="text-lg font-bold text-cyan-900 mb-1 text-left font-handwriting">
+        <div className="text-lg font-bold text-[#0e465a] mb-1 text-left font-handwriting">
           {title}
         </div>
 
         {/* Description */}
-        <div className="text-sm text-cyan-900 text-left opacity-70 font-handwriting">
+        <div className="text-sm text-[#0e465a] text-center opacity-70 font-handwriting">
           {desc}
         </div>
       </div>
