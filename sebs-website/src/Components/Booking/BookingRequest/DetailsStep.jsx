@@ -15,9 +15,7 @@ export default function DetailsStep() {
       customerName: formData.name,
       customerEmail: formData.email,
       customerPhone: formData.contact,
-      eventDate: booking.date
-        ? booking.date.toISOString().split('T')[0] // Just date: "2025-11-17"
-        : new Date().toISOString().split('T')[0],
+      eventDate: booking.date,
       location: formData.address,
       eventType: 1,
       eventName: `${booking.service?.title || "Event"} - ${
@@ -32,14 +30,14 @@ export default function DetailsStep() {
       }`,
       services: [
         {
-          ServiceID: booking.service?.id || 1,
-          Quantity: parseInt(formData.duration) || 1,
-          CustomPrice: parseFloat(
-            booking.service?.price?.replace("$", "") || "0"
+          serviceID: booking.service?.id || 1, // changed to camelCase
+          quantity: parseInt(formData.duration) || 1, // changed to camelCase
+          customPrice: parseFloat(
+            booking.service?.price?.replace(/[^\d.]/g, '') || "0" // Improved price parsing
           ),
-          Notes: `${booking.service?.desc || "Service"} - ${
+          notes: `${booking.service?.desc || "Service"} - ${
             formData.time || "Time TBD"
-          }`,
+          }`, // changed to camelCase
         },
       ],
     };
@@ -51,7 +49,10 @@ export default function DetailsStep() {
       `${getApiUrl()}/api/booking/request`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest" // Add this to help prevent CSRF issues
+        },
         body: JSON.stringify(requestBody),
       }
     );
