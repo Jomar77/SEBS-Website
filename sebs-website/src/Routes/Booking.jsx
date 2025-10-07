@@ -12,7 +12,7 @@ export default function Booking() {
   const isMainBookingPage = location.pathname === "/booking";
 
   return (
-    <div className="w-full">
+    <div className="w-full min-h-screen">
       {/* Only show progress bar on booking steps, not landing or success pages */}
       {showProgressBar && <ProgressBar />}
       

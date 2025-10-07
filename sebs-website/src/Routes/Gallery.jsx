@@ -19,9 +19,9 @@ export default function Gallery() {
 
   return (
     <>
-      <div>
+      <div className="w-full max-w-7xl mx-auto">
         <CurvedCarousel panels={galleryPanels} />
-         <GalleryShowcase />
+        <GalleryShowcase />
         <EventPackageSection />
       </div>
     </>
