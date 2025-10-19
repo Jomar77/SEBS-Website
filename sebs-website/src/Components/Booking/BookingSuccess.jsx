@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useBooking } from "../../Context/BookingContext";
 import WavePattern from "../Common/WavePattern";
@@ -10,11 +10,79 @@ import {
   faClock, 
   faLocationDot, 
   faDollarSign, 
-  faCheckCircle 
+  faCheckCircle,
+  faCopy,
+  faCheck,
+  faDownload
 } from '@fortawesome/free-solid-svg-icons';
+import html2canvas from 'html2canvas';
 
 export default function BookingSuccess() {
   const { booking } = useBooking();
+  const [copied, setCopied] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+  const receiptRef = useRef(null);
+
+  const handleCopyBookingNumber = async () => {
+    if (booking.bookingReference) {
+      try {
+        await navigator.clipboard.writeText(booking.bookingReference);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+      } catch (err) {
+        console.error('Failed to copy booking number:', err);
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = booking.bookingReference;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }
+    }
+  };
+
+  const handleDownloadReceipt = async () => {
+    if (!receiptRef.current) return;
+    
+    setDownloading(true);
+    try {
+      const canvas = await html2canvas(receiptRef.current, {
+        backgroundColor: '#ffffff',
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        ignoreElements: (element) => {
+          // Skip elements that might cause color parsing issues
+          return element.classList?.contains('animate-bounce') || false;
+        },
+        onclone: (clonedDoc) => {
+          // Force all DaisyUI classes to use explicit colors
+          const clonedElement = clonedDoc.querySelector('[data-theme]');
+          if (clonedElement) {
+            clonedElement.removeAttribute('data-theme');
+          }
+        }
+      });
+      
+      // Create download link
+      const link = document.createElement('a');
+      link.download = `SEBS-Booking-Receipt-${booking.bookingReference || new Date().toISOString().slice(0, 10)}.png`;
+      link.href = canvas.toDataURL();
+      
+      // Trigger download
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Failed to download receipt:', error);
+      alert('Sorry, there was an issue downloading your receipt. Please try again.');
+    } finally {
+      setDownloading(false);
+    }
+  };
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-base-100 overflow-hidden">
@@ -27,7 +95,7 @@ export default function BookingSuccess() {
       <div className="relative z-10 flex flex-col items-center w-full min-h-screen py-12">
 
         {/* Receipt Card */}
-        <div className="bg-white w-full max-w-md rounded-xl shadow-lg border border-dashed border-[#a8a29e] px-8 py-10 flex flex-col gap-6">
+        <div ref={receiptRef} className="bg-white w-full max-w-md rounded-xl shadow-lg border border-dashed border-[#a8a29e] px-8 py-10 flex flex-col gap-6">
           {/* Header */}
           <div className="text-center mb-2">
             <h2 className="font-yeseva text-2xl text-[#204558] tracking-wide mb-1">Booking Receipt</h2>
@@ -37,19 +105,19 @@ export default function BookingSuccess() {
           {/* Business Details */}
           <div className="grid grid-cols-1 gap-2 text-sm">
             <div className="flex justify-between">
-              <span className="font-semibold text-gray-700">Business name:</span>
+              <span className="font-semibold" style={{ color: '#374151' }}>Business name:</span>
               <span className="text-[#79803c]">SEBS Event Planning</span>
             </div>
             <div className="flex justify-between">
-              <span className="font-semibold text-gray-700">Email:</span>
+              <span className="font-semibold" style={{ color: '#374151' }}>Email:</span>
               <span className="text-[#79803c]">{booking.form?.email || "your email"}</span>
             </div>
             <div className="flex justify-between">
-              <span className="font-semibold text-gray-700">Phone Number:</span>
+              <span className="font-semibold" style={{ color: '#374151' }}>Phone Number:</span>
               <span className="text-[#79803c]">{booking.form?.contact || "your phone"}</span>
             </div>
             <div className="flex justify-between">
-              <span className="font-semibold text-gray-700">Booking Date:</span>
+              <span className="font-semibold" style={{ color: '#374151' }}>Booking Date:</span>
               <span className="text-[#79803c]">
                 {booking.date ? booking.date.toLocaleDateString('en-US') : "your selected date"}
               </span>
@@ -59,15 +127,31 @@ export default function BookingSuccess() {
           {/* Booking Reference */}
           {booking.bookingReference && (
             <div className="flex justify-between items-center py-2 border-y border-dashed border-[#e5aac3]">
-              <span className="font-semibold text-gray-700">Booking Number:</span>
-              <span className="font-mono text-[#79803c] font-bold text-2xl tracking-widest">
-                {booking.bookingReference}
-              </span>
+              <span className="font-semibold" style={{ color: '#374151' }}>Booking Number:</span>
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-[#79803c] font-bold text-2xl tracking-widest">
+                  {booking.bookingReference}
+                </span>
+                <button
+                  onClick={handleCopyBookingNumber}
+                  className={`p-2 rounded-md transition-all duration-200`}
+                  style={{
+                    backgroundColor: copied ? '#dcfce7' : '#efaac3',
+                    color: copied ? '#16a34a' : '#ffffff'
+                  }}
+                  title={copied ? 'Copied!' : 'Copy booking number'}
+                >
+                  <FontAwesomeIcon 
+                    icon={copied ? faCheck : faCopy} 
+                    className="text-sm"
+                  />
+                </button>
+              </div>
             </div>
           )}
 
           {/* Personalized Message */}
-          <div className="text-sm text-gray-700 italic">
+          <div className="text-sm italic" style={{ color: '#374151' }}>
             Dear <span className="font-semibold">{booking.form?.name || "Valued Customer"}</span>,<br />
             We thank you for choosing <span className="font-semibold">SEBS Event Planning</span>.<br />
             Below are your booking details.
@@ -141,7 +225,7 @@ export default function BookingSuccess() {
           </div>
 
           {/* Footer */}
-          <div className="text-center text-gray-700 font-medium pt-4 border-t border-dashed border-[#e5aac3]">
+          <div className="text-center font-medium pt-4 border-t border-dashed border-[#e5aac3]" style={{ color: '#374151' }}>
             Thank you for trusting us.<br />We look forward to being part of your celebration!
           </div>
         </div>
@@ -152,9 +236,26 @@ export default function BookingSuccess() {
           <p>You should receive a confirmation email at <span className="font-semibold">{booking.form?.email || "your email address"}</span></p>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+          <button
+            onClick={handleDownloadReceipt}
+            disabled={downloading}
+            className="btn border-none px-8"
+            style={{
+              backgroundColor: downloading ? '#9ca3af' : '#efaac3',
+              color: '#ffffff',
+              cursor: downloading ? 'not-allowed' : 'pointer'
+            }}
+          >
+            <FontAwesomeIcon 
+              icon={faDownload} 
+              className={`mr-2 ${downloading ? 'animate-bounce' : ''}`}
+            />
+            {downloading ? 'Downloading...' : 'Download Receipt'}
+          </button>
           <Link 
             to="/" 
-            className="btn bg-[#79803c] text-white hover:bg-[#79803c]/80 border-none px-8"
+            className="btn border-none px-8"
+            style={{ backgroundColor: '#79803c', color: '#ffffff' }}
           >
             Return to Home
           </Link>

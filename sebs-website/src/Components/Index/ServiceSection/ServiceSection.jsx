@@ -14,6 +14,18 @@ export default function ServiceSection() {
   const titleRef = useRef();
   const cardsRef = useRef();
 
+  // Use 1024px as breakpoint for 3-column grid (iPad Mini and smaller = carousel)
+  const [isCarousel, setIsCarousel] = useState(window.innerWidth < 1024);
+
+  useEffect(() => {
+    function handleResize() {
+      // If less than 1024px, use carousel (iPad Mini and smaller)
+      setIsCarousel(window.innerWidth < 1024);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Animate title with enhanced entrance
@@ -77,6 +89,10 @@ export default function ServiceSection() {
     return () => ctx.revert();
   }, []);
 
+  // Carousel navigation handlers
+  const handlePrev = () => setCurrent((prev) => (prev === 0 ? services.length - 1 : prev - 1));
+  const handleNext = () => setCurrent((prev) => (prev === services.length - 1 ? 0 : prev + 1));
+
   return (
     <section ref={sectionRef} className="relative bg-base-200 overflow-hidden">
       <div className="wave-background absolute top-0 left-0 w-full h-full opacity-40 pointer-events-none z-0">
@@ -100,16 +116,46 @@ export default function ServiceSection() {
           {error && (
             <div className="flex items-center justify-center w-full h-64 text-red-500">Failed to load services.</div>
           )}
-          {!loading && !error && services.length > 0 && (
-            <div
-              ref={cardsRef}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center"
-            >
-              {services.map((service) => (
-                <div key={service.id} className="w-full max-w-sm">
-                  <ServiceCard {...service} />
-                </div>
-              ))}
+          {/* Only show grid if enough space for 3 columns */}
+          {!isCarousel && (
+            <div className="grid grid-cols-3 gap-8 justify-items-center" ref={cardsRef}>
+              {!loading && !error && services.length > 0 &&
+                services.map((service) => (
+                  <div key={service.id} className="w-full max-w-sm">
+                    <ServiceCard {...service} />
+                  </div>
+                ))}
+            </div>
+          )}
+          {/* Carousel for iPad Mini and smaller or any device < 1024px */}
+          {isCarousel && (
+            <div className="flex flex-col items-center" ref={cardsRef}>
+              {!loading && !error && services.length > 0 && (
+                <>
+                  <div className="w-full max-w-sm mx-auto flex justify-center">
+                    <ServiceCard {...services[current]} />
+                  </div>
+                  <div className="flex justify-center gap-4 mt-6">
+                    <button
+                      className="btn btn-outline btn-sm"
+                      onClick={handlePrev}
+                      aria-label="Previous Service"
+                    >
+                      Prev
+                    </button>
+                    <span className="text-sm font-semibold">
+                      {current + 1} / {services.length}
+                    </span>
+                    <button
+                      className="btn btn-outline btn-sm"
+                      onClick={handleNext}
+                      aria-label="Next Service"
+                    >
+                      Next
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           )}
         </div>

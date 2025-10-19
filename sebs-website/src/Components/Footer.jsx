@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <footer className="bg-[#8fc2c3] text-[#17414d] w-full pt-12 pb-4">
-      <div className="max-w-4xl ml-14 mr-4 px-8">
+      {/* Desktop: original layout, Tablet & smaller: compact layout */}
+      <div className="max-w-4xl mx-auto px-8 lg:ml-14 lg:mr-4 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mb-8 md:justify-start">
           {/* Quick Links */}
           <nav aria-label="Footer Navigation" className="md:justify-self-start">
@@ -74,7 +75,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="mx-22">
+      <div className="lg:mx-22 mx-auto max-w-4xl">
         <div className="border-t border-[#17414d] w-full" />
       </div>
 

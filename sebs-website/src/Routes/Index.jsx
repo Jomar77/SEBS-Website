@@ -11,7 +11,7 @@ export default function Index() {
     <div className="bg-white">
       <section className="relative flex flex-col items-center justify-center h-screen bg-base-100 overflow-hidden">
         <AnimatedBackground />
-        <div className="relative z-10 max-w-2xl mx-auto px-8">
+        <div className="relative z-10 w-full max-w-2xl mx-auto px-4 sm:px-8">
           {/* White background card */}
           <div className="bg-white/80 rounded-3xl shadow-2xl p-2 text-center">
             {/* Logo Image */}
@@ -20,6 +20,7 @@ export default function Index() {
                 src="/img/IMG_2423.PNG"
                 alt="Psalm & Platter"
                 className="h-100 w-auto"
+                loading="lazy"
               />
             </div>
           </div>
