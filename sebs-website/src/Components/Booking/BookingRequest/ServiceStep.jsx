@@ -3,10 +3,9 @@ import { useBooking } from "../../../Context/BookingContext";
 import BookServiceSection from "../ServiceSectionBooking/BookServiceSection";
 
 const services = [
-  { id: 1, price: "$300", title: "Psalm $ Platter", desc: "Per hour", highlight: false },
-  { id: 2, price: "$450", title: "The Arkives", desc: "Lorem Ipsum", highlight: false },
-  { id: 3, price: "$500", title: "Package A", desc: "Lorem Ipsum", highlight: true },
-  { id: 4, price: "$600", title: "Package B", desc: "Lorem Ipsum", highlight: false },
+  { id: 1, price: "$300", title: "Psalm & Platter", desc: "Per Event", highlight: false },
+  { id: 2, price: "$450", title: "The Arkives", desc: "Per Event", highlight: false },
+  { id: 4, price: "$350", title: "Matcha Cart", desc: "Per Event", highlight: true },
 ];
 
 export default function ServiceStep() {
