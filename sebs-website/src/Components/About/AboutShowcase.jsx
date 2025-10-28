@@ -17,9 +17,23 @@ export default function AboutShowcase() {
           Instagram-worthy as it is delicious.
         </p>
       </div>
-      <div className="bg-base-200  h-40 flex justify-center items-center rounded-2xl"></div>
+      <div className="bg-base-200 h-40 flex justify-center items-center rounded-2xl overflow-hidden">
+        <img 
+          src="/img/P&P New.png" 
+          alt="Psalm & Platter gourmet grazing cart" 
+          className="w-full h-full object-contain"
+          loading="lazy"
+        />
+      </div>
 
-      <div className="bg-base-200 h-40 flex justify-center items-center rounded-2xl"></div>
+      <div className="bg-base-200 h-40 flex justify-center items-center rounded-2xl overflow-hidden">
+        <img 
+          src="/img/LOGO5 copy.png" 
+          alt="The Arkives photo booth experience" 
+          className="w-full h-full object-contain"
+          loading="lazy"
+        />
+      </div>
       <div className="space-y-4 flex flex-col justify-center h-full">
         <h3 className="font-corben-reg text-2xl text-[#fb8950] text-left">
           The Arkives: Capture The Moment
@@ -45,7 +59,14 @@ export default function AboutShowcase() {
           as Instagram-worthy as it is delicious.
         </p>
       </div>  
-      <div className="bg-base-200 h-40 flex justify-center items-center rounded-2xl "></div>
+      <div className="bg-base-200 h-40 flex justify-center items-center rounded-2xl overflow-hidden">
+        <img 
+          src="/img/Whiskers.png" 
+          alt="Matcha Cart service" 
+          className="w-full h-full object-contain"
+          loading="lazy"
+        />
+      </div>
     </section>
   );
 }
