@@ -23,6 +23,7 @@ import DetailsStep from "./Components/Booking/BookingRequest/DetailsStep.jsx";
 import BookingSuccess from "./Components/Booking/BookingSuccess.jsx";
 import BookingLanding from "./Components/Booking/BookingLanding.jsx";
 import Lookup from "./Components/Booking/BookingLookup/Lookup.jsx";
+import PrivacyPolicy from "./Routes/privacy-policy.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -40,6 +41,7 @@ const router = createBrowserRouter(
         </Route>
         <Route path="about" element={<About />} />
         <Route path="gallery" element={<Gallery />} />
+        <Route path="privacy-policy" element={<PrivacyPolicy />} />
       </Route>
     </Route>
   )

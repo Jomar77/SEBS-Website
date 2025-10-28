@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import emailjs from '@emailjs/browser';
 import {
   RiFacebookFill,
   RiWhatsappFill,
@@ -9,6 +10,79 @@ import { FaFacebookMessenger, FaEnvelope, FaFacebook, FaWhatsapp } from "react-i
 export default function AboutForm() {
   const logo1Ref = useRef(null);
   const dividerRef = useRef(null);
+  const formRef = useRef(null);
+  
+  // Form state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
+
+  // Handle input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Handle form submission with EmailJS
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      alert('Please fill in all fields.');
+      return;
+    }
+    
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    
+    // EmailJS configuration - replace with your actual IDs
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
+    
+    // Template params that match EmailJS template variables
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+      to_name: 'Psalm & Platter', // Your business name
+    };
+    
+    emailjs.send(serviceId, templateId, templateParams, publicKey)
+      .then((response) => {
+        console.log('Email sent successfully!', response.status, response.text);
+        setSubmitStatus('success');
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+        // Clear success message after 5 seconds
+        setTimeout(() => setSubmitStatus(null), 5000);
+      })
+      .catch((error) => {
+        console.error('Email sending failed:', error);
+        setSubmitStatus('error');
+        // Clear error message after 5 seconds
+        setTimeout(() => setSubmitStatus(null), 5000);
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -103,28 +177,72 @@ export default function AboutForm() {
             experience. Our gourmet grazing cart redefines event catering with
             fresh, artfully styled spreads that dazzle the senses.
           </p>
-          <form className="space-y-4">
-            {["Name", "Email", "Subject"].map((field) => (
-              <div key={field}>
-                <label className="block text-[#23404a] mb-1">{field}</label>
-                <input
-                  type={field === "Email" ? "email" : "text"}
-                  className="border-[0.5px] border-[#23404a] rounded-md w-full px-3 py-2 focus:outline-none bg-white"
-                />
-              </div>
-            ))}
+          
+          {/* Success/Error Messages */}
+          {submitStatus === 'success' && (
+            <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-md">
+              <p className="font-semibold">Message sent successfully!</p>
+              <p className="text-sm">We'll get back to you as soon as possible.</p>
+            </div>
+          )}
+          {submitStatus === 'error' && (
+            <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-md">
+              <p className="font-semibold">Failed to send message.</p>
+              <p className="text-sm">Please check your EmailJS configuration or try again later.</p>
+            </div>
+          )}
+          
+          <form ref={formRef} className="space-y-4" onSubmit={handleSubmit}>
+            <div>
+              <label className="block text-[#23404a] mb-1">Name</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="border-[0.5px] border-[#23404a] rounded-md w-full px-3 py-2 focus:outline-none bg-white"
+              />
+            </div>
+            <div>
+              <label className="block text-[#23404a] mb-1">Email</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="border-[0.5px] border-[#23404a] rounded-md w-full px-3 py-2 focus:outline-none bg-white"
+              />
+            </div>
+            <div>
+              <label className="block text-[#23404a] mb-1">Subject</label>
+              <input
+                type="text"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                required
+                className="border-[0.5px] border-[#23404a] rounded-md w-full px-3 py-2 focus:outline-none bg-white"
+              />
+            </div>
             <div>
               <label className="block text-[#23404a] mb-1">Message</label>
               <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
                 className="border-[0.5px] border-[#23404a] rounded-md w-full px-3 py-5 focus:outline-none bg-white"
                 rows="4"
               ></textarea>
             </div>
             <button
-              type="button"
-              className=" w-full rounded-xl bg-[#f0a7c2] text-white font-semibold rounded-md hover:bg-white hover:text-[#f0a7c2] transition duration-200"
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full py-3 rounded-xl bg-[#f0a7c2] text-white font-semibold hover:bg-white hover:text-[#f0a7c2] transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Confirm
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>
           </form>
         </div>

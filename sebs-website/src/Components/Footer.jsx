@@ -33,6 +33,11 @@ export default function Footer() {
                   Booking
                 </Link>
               </li>
+              <li>
+                <Link to="/privacy-policy" className="hover:underline">
+                  Privacy Policy
+                </Link>
+              </li>
             </ul>
           </nav>
 

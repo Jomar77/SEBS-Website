@@ -3,30 +3,42 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Link } from "react-router-dom";
 import PolaroidCard from "../../Common/PolaroidCard";
+import { getApiUrl } from "../../../Utils/apiConfig";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const galleryItems = [
-	{ id: 1, color: "bg-gradient-to-br from-orange-400 to-red-500" },
-	{ id: 2, color: "bg-gradient-to-br from-yellow-400 to-orange-500" },
-	{ id: 3, color: "bg-gradient-to-br from-pink-400 to-rose-500" },
-	{ id: 4, color: "bg-gradient-to-br from-teal-400 to-cyan-500" },
-	{ id: 5, color: "bg-gradient-to-br from-purple-400 to-pink-500" },
-	{ id: 6, color: "bg-gradient-to-br from-blue-400 to-purple-500" },
-	{ id: 7, color: "bg-gradient-to-br from-green-400 to-teal-500" },
-	{ id: 8, color: "bg-gradient-to-br from-indigo-400 to-blue-500" },
-	{ id: 9, color: "bg-gradient-to-br from-red-400 to-pink-500" },
-	{ id: 10, color: "bg-gradient-to-br from-amber-400 to-yellow-500" },
-];
-
 export default function GallerySection() {
 	const [currentSlide, setCurrentSlide] = useState(0);
+	const [galleryItems, setGalleryItems] = useState([]);
+	const [loading, setLoading] = useState(true);
 	const sectionRef = useRef();
 	const carouselRef = useRef();
 	const buttonRef = useRef();
 
 	const visibleSlides = 4; // Always show 4 photos
 	const maxSlide = Math.max(0, galleryItems.length - visibleSlides);
+
+	// Fetch highlight images from API
+	useEffect(() => {
+		const apiUrl = getApiUrl();
+		fetch(`${apiUrl}/api/public/highlights`)
+			.then((res) => res.ok ? res.json() : Promise.reject(res))
+			.then((data) => {
+				// Transform API data to include full image URLs
+				const highlights = data.map((item) => ({
+					id: item.highlightId,
+					imageUrl: `${apiUrl}${item.imageUrl}`,
+					fileName: item.image.fileName,
+					displayOrder: item.displayOrder,
+				}));
+				setGalleryItems(highlights);
+				setLoading(false);
+			})
+			.catch((error) => {
+				console.error("Failed to fetch highlight images:", error);
+				setLoading(false);
+			});
+	}, []);
 
 	useEffect(() => {
 		const ctx = gsap.context(() => {
@@ -139,17 +151,36 @@ export default function GallerySection() {
 								width: `${(galleryItems.length / 4) * 100}%`, // Total width for all slides
 							}}
 						>
-							{galleryItems.map((item) => (
-								<div
-									key={item.id}
-									className="flex-shrink-0 flex items-center justify-center px-2 w-1/4"
-								>
-									<PolaroidCard
-										color={item.color}
-										className="w-full max-w-[240px] h-[300px] sm:h-[320px] md:h-[340px] rounded-2xl shadow-md"
-									/>
+							{loading ? (
+								// Loading skeletons
+								Array.from({ length: 4 }).map((_, index) => (
+									<div
+										key={`skeleton-${index}`}
+										className="flex-shrink-0 flex items-center justify-center px-2 w-1/4"
+									>
+										<div className="w-full max-w-[240px] h-[300px] sm:h-[320px] md:h-[340px] bg-base-200 animate-pulse rounded-2xl shadow-md" />
+									</div>
+								))
+							) : galleryItems.length > 0 ? (
+								// Actual gallery items
+								galleryItems.map((item) => (
+									<div
+										key={item.id}
+										className="flex-shrink-0 flex items-center justify-center px-2 w-1/4"
+									>
+										<PolaroidCard
+											imageUrl={item.imageUrl}
+											alt={item.fileName}
+											className="w-full max-w-[240px] h-[300px] sm:h-[320px] md:h-[340px] rounded-2xl shadow-md"
+										/>
+									</div>
+								))
+							) : (
+								// Fallback message
+								<div className="w-full text-center py-12 text-gray-500">
+									No highlight images available
 								</div>
-							))}
+							)}
 						</div>
 					</div>
 
