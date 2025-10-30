@@ -3,24 +3,27 @@
 import GalleryShowcase from "../Components/Gallery/ShowcaseGallery/GalleryShowcase";
 import CurvedCarousel from "../Components/Gallery/CarouselGallery/ParallaxCarousel";
 import EventPackageSection from "../Components/Common/EventPackageSection/EventPackageSection";
+import { useHighlights } from "../Hooks/useHighlights";
 
 export default function Gallery() {
-  // Sample gallery data for event planning business
-  const galleryPanels = [
-    '#FF7F50', // Coral - Wedding Ceremony
-    '#FFD700', // Gold - Corporate Event  
-    '#7FB3D3', // Sky Blue - Birthday Party
-    '#DDA0DD', // Plum - Anniversary
-    '#98FB98', // Light Green - Baby Shower
-    '#F0E68C', // Khaki - Graduation
-    '#FFA07A', // Light Salmon - Engagement
-    '#87CEEB'  // Sky Blue - Reunion
-  ];
+  const { highlights, loading, error } = useHighlights();
 
   return (
     <>
       <div className="w-full max-w-7xl mx-auto">
-        <CurvedCarousel panels={galleryPanels} />
+        {loading && (
+          <div className="flex items-center justify-center w-full h-64 text-lg">
+            Loading gallery...
+          </div>
+        )}
+        {error && (
+          <div className="flex items-center justify-center w-full h-64 text-red-500">
+            Failed to load gallery images.
+          </div>
+        )}
+        {!loading && !error && highlights.length > 0 && (
+          <CurvedCarousel panels={highlights} />
+        )}
         <GalleryShowcase />
         <EventPackageSection />
       </div>
