@@ -44,9 +44,9 @@ const BookingFormSection = ({ onSubmit, selectedService, selectedDate }) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row w-full min-h-screen bg-white">
+  <div className="flex flex-col md:flex-row w-full min-h-screen bg-white">
       {/* Booking Overview */}
-      <div className="md:w-1/2 w-full p-16 border-r border-gray-300 flex flex-col justify-start">
+  <div className="md:w-1/2 w-full p-16 border-r border-gray-300 flex flex-col justify-start">
         <h2 className="font-corben-reg text-4xl text-[#fb8950] mb-2">Booking Overview</h2>
         <p className="font-corben-reg text-[#204558] mb-6">
           This is your order summary where you can edit and delete your order and select your preferred delivery type.
@@ -54,22 +54,32 @@ const BookingFormSection = ({ onSubmit, selectedService, selectedDate }) => {
         {/* Package Card */}
         <div className="border border-[#204558] p-4 flex items-center justify-between mb-6">
           <div className="flex items-center gap-4">
-            <div className="bg-orange-200 w-32 h-24 rounded" />
+            {selectedService?.imageUrl ? (
+              <img
+                src={selectedService.imageUrl}
+                alt={selectedService.imageAlt || selectedService.title || "Service image"}
+                className="w-32 h-24 object-cover rounded"
+                loading="lazy"
+              />
+            ) : (
+              <div className="bg-orange-200 w-32 h-24 rounded" />
+            )}
             <div>
               <div className="text-lg font-medium text-[#0e465a]">
                 {selectedService?.title || "No service selected"}
               </div>
               <div className="text-[#0e465a]">
-                {selectedService?.desc || "per hour"}
+                {selectedService?.desc || "Per Event"}
               </div>
             </div>
           </div>
           <div className="text-right">
             <div className="text-2xl font-semibold text-[#0e465a]">
-              {selectedService?.price || "$0"}
+              ${selectedService?.basePrice || "$0"}
             </div>
             <div className="text-[#0e465a]">
-              per hour
+              {/* Only show 'per event' if desc is not present or is 'per event' */}
+              {(!selectedService?.desc || selectedService?.desc.toLowerCase().includes("event")) ? "per event" : selectedService?.desc}
             </div>
           </div>
         </div>
