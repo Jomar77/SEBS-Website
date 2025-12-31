@@ -80,7 +80,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="lg:mx-22 mx-auto max-w-4xl">
+      <div className="lg:mx-22 ">
         <div className="border-t border-[#17414d] w-full" />
       </div>
 
