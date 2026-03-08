@@ -25,6 +25,25 @@ import BookingLanding from "./Components/Booking/BookingLanding.jsx";
 import Lookup from "./Components/Booking/BookingLookup/Lookup.jsx";
 import PrivacyPolicy from "./Routes/privacy-policy.jsx";
 
+function TabTitlePrompt() {
+  React.useEffect(() => {
+    const defaultTitle = document.title;
+
+    const handleVisibilityChange = () => {
+      document.title = document.hidden ? "Book with us now!" : defaultTitle;
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      document.title = defaultTitle;
+    };
+  }, []);
+
+  return null;
+}
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
@@ -51,6 +70,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <DataProvider>
       <BookingProvider>
+        <TabTitlePrompt />
         <RouterProvider router={router} />
         <Analytics />
       </BookingProvider>
