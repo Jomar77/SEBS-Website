@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 
-export default function CalendarMonth({ year, month, onDateSelect, selectedDate }) {
+function getDateKey(date) {
+  const year = date.getFullYear();
+  const monthValue = `${date.getMonth() + 1}`.padStart(2, "0");
+  const dayValue = `${date.getDate()}`.padStart(2, "0");
+  return `${year}-${monthValue}-${dayValue}`;
+}
+
+export default function CalendarMonth({ year, month, onDateSelect, selectedDate, bookedDateKeys }) {
   const [calendarDays, setCalendarDays] = useState([]);
 
   const monthNames = [
@@ -12,7 +19,7 @@ export default function CalendarMonth({ year, month, onDateSelect, selectedDate 
 
   useEffect(() => {
     generateCalendarDays();
-  }, [year, month, selectedDate]); // Add selectedDate as dependency
+  }, [year, month, selectedDate, bookedDateKeys]);
 
   const generateCalendarDays = () => {
     const firstDay = new Date(year, month, 1);
@@ -30,6 +37,7 @@ export default function CalendarMonth({ year, month, onDateSelect, selectedDate 
       
       const isCurrentMonth = currentDate.getMonth() === month;
       const isPast = currentDate < today;
+      const isBooked = isCurrentMonth && bookedDateKeys?.has(getDateKey(currentDate));
       const isToday = currentDate.toDateString() === today.toDateString();
       const isSelected = selectedDate && 
         currentDate.toDateString() === selectedDate.toDateString();
@@ -39,6 +47,7 @@ export default function CalendarMonth({ year, month, onDateSelect, selectedDate 
         day: currentDate.getDate(),
         isCurrentMonth,
         isPast,
+        isBooked,
         isToday,
         isSelected
       });
@@ -48,7 +57,7 @@ export default function CalendarMonth({ year, month, onDateSelect, selectedDate 
   };
 
   const handleDateClick = (dayObj) => {
-    if (dayObj.isPast || !dayObj.isCurrentMonth) return;
+    if (dayObj.isPast || dayObj.isBooked || !dayObj.isCurrentMonth) return;
     onDateSelect(dayObj.date);
   };
 
@@ -74,12 +83,14 @@ export default function CalendarMonth({ year, month, onDateSelect, selectedDate 
             key={index}
             onClick={() => handleDateClick(dayObj)}
             className={`
-              h-8 flex items-center justify-center text-sm border border-gray-100 cursor-pointer transition-all duration-200
+              h-8 flex items-center justify-center text-sm border border-gray-100 transition-all duration-200
               ${!dayObj.isCurrentMonth ? 'text-gray-300 bg-gray-50' : ''}
               ${dayObj.isPast && dayObj.isCurrentMonth ? 'text-gray-400 bg-gray-100 cursor-not-allowed' : ''}
+              ${dayObj.isBooked ? 'text-gray-400 bg-gray-200 cursor-not-allowed' : ''}
               ${dayObj.isToday ? 'bg-[#fef3c7] text-[#204558] font-bold' : ''}
               ${dayObj.isSelected ? 'bg-[#f8d1d6] text-[#204558] font-bold' : ''}
-              ${!dayObj.isPast && dayObj.isCurrentMonth && !dayObj.isSelected && !dayObj.isToday ? 'text-[#204558] hover:bg-[#f8d1d6]' : ''}
+              ${!dayObj.isPast && !dayObj.isBooked && dayObj.isCurrentMonth ? 'cursor-pointer' : 'cursor-default'}
+              ${!dayObj.isPast && !dayObj.isBooked && dayObj.isCurrentMonth && !dayObj.isSelected && !dayObj.isToday ? 'text-[#204558] hover:bg-[#f8d1d6]' : ''}
             `}
           >
             {dayObj.day}

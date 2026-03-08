@@ -1,12 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CalendarMonth from "./CalendarMonth";
 import WavePattern from "../../Common/WavePattern";
+import { fetchBookedDates } from "../../../Services/serviceApi";
+
+function getDateKey(date) {
+  const year = date.getFullYear();
+  const month = `${date.getMonth() + 1}`.padStart(2, "0");
+  const day = `${date.getDate()}`.padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function normalizeBookedDate(item) {
+  const rawValue =
+    typeof item === "string"
+      ? item
+      : item?.date || item?.eventDate || item?.bookedDate || Object.values(item || {})[0];
+
+  if (!rawValue) return null;
+
+  if (rawValue instanceof Date) {
+    return getDateKey(rawValue);
+  }
+
+  if (typeof rawValue === "string" && /^\d{4}-\d{2}-\d{2}/.test(rawValue)) {
+    return rawValue.slice(0, 10);
+  }
+
+  const parsed = new Date(rawValue);
+  if (Number.isNaN(parsed.getTime())) return null;
+
+  return getDateKey(parsed);
+}
 
 export default function CalendarSection({ onDateSelect }) {
   const now = new Date();
   const [startYear, setStartYear] = useState(now.getFullYear());
   const [startMonth, setStartMonth] = useState(now.getMonth());
   const [selectedDate, setSelectedDate] = useState(null);
+  const [bookedDateKeys, setBookedDateKeys] = useState(new Set());
+
+  useEffect(() => {
+    fetchBookedDates()
+      .then((data) => {
+        const normalized = (Array.isArray(data) ? data : [])
+          .map(normalizeBookedDate)
+          .filter(Boolean);
+
+        setBookedDateKeys(new Set(normalized));
+      })
+      .catch((error) => {
+        console.error("Failed to fetch booked dates", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (!selectedDate) return;
+
+    const selectedDateKey = getDateKey(selectedDate);
+    if (bookedDateKeys.has(selectedDateKey)) {
+      setSelectedDate(null);
+    }
+  }, [bookedDateKeys, selectedDate]);
 
   // Prevent navigating to past months
   const isPrevDisabled =
@@ -19,15 +73,8 @@ export default function CalendarSection({ onDateSelect }) {
 
   // Handle confirm button click
   const handleConfirmDate = () => {
-    console.log("Confirm button clicked");
-    console.log("selectedDate:", selectedDate);
-    console.log("onDateSelect:", onDateSelect);
-    
     if (selectedDate && onDateSelect) {
-      console.log("Calling onDateSelect with:", selectedDate);
       onDateSelect(selectedDate);
-    } else {
-      console.log("Missing selectedDate or onDateSelect");
     }
   };
 
@@ -112,12 +159,14 @@ export default function CalendarSection({ onDateSelect }) {
                 month={startMonth}
                 onDateSelect={handleDateSelect}
                 selectedDate={selectedDate}
+                bookedDateKeys={bookedDateKeys}
               />
               <CalendarMonth
                 year={startMonth === 11 ? startYear + 1 : startYear}
                 month={startMonth === 11 ? 0 : startMonth + 1}
                 onDateSelect={handleDateSelect}
                 selectedDate={selectedDate}
+                bookedDateKeys={bookedDateKeys}
               />
             </div>
             
